@@ -21,3 +21,8 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# 보안 설정
+docker-compose.yml
+.env.development
+.env.production

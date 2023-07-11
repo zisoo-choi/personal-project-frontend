@@ -4,7 +4,7 @@ import env from "../env";
 const axiosInst = axios.create({
     baseURL: 'http://localhost:7777',
     // baseURL: env.api.MAIN_API_URL,
-    timeout: 2500
+    timeout: 5000
 })
 
 export default axiosInst

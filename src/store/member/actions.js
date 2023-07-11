@@ -20,5 +20,46 @@ export default {
                 alert("문제 발생!")
             })
     },
+    // 이메일 인증
+    requestSpringToCheckEmailDuplication ({}, payload) {
+        const { to } = payload
+
+        return axiosInst.post("/email-authentication/send-email", payload)
+            .then((res) => {
+                alert("회원님의 계정으로 이메일 전송이 완료되었습니다.")
+            })
+    },
+    // 이메일 코드 인증
+    requestSpringToCheckAuthenticationCode ({}, payload) {
+        const { authCode } = payload
+
+        return axiosInst.post("/email-authentication/authentication-code", payload)
+            .then((res) => {
+                return res.data
+            })
+    },
+    // 회원가입
+    requestRegisterMemberToSpring ({}, payload) {
+        const { memberId, memberPw, email, address, phoneNumber, memberRole } = payload
+
+        return axiosInstances.springAxiosInst.post('/library-member/sign-up', {
+                memberId,
+                memberPw,
+                email,
+                address,
+                phoneNumber,
+                memberRole
+            })
+            .then((res) => {
+                if(res == true){
+                    alert('회원 가입 성공!')
+                } else {
+                    alert("회원 가입 실패")
+                }
+            })
+            .catch(() => {
+                alert('문제 발생!')
+            })
+    }
 }
   

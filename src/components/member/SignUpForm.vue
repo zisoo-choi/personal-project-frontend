@@ -30,6 +30,7 @@
                                     <v-text-field
                                         v-model="memberPw"
                                         label="사용자 비밀번호"
+                                        type="password"
                                         :disabled="false"
                                         required
                                     ></v-text-field>
@@ -47,6 +48,21 @@
                                             @click="checkDuplicateEmail"
                                             :disabled="false">
                                             google</br>이메일 인증
+                                    </v-btn>
+                                </div>
+                                <div class="d-flex" v-if="isPressedButton" >
+                                    <v-text-field
+                                        v-model="emailCode"
+                                        label="전송된 이메일 코드"
+                                        
+                                        type="password"
+                                        :disabled="false"
+                                    ></v-text-field>
+                                    <v-btn text large outlined style="font-size: 13px"
+                                            class="mt-3 ml-5" color="teal lighten-1"
+                                            @click="checkDuplicateCode"
+                                            :disabled="false">
+                                            코드 검증
                                     </v-btn>
                                 </div>
                                 
@@ -100,26 +116,41 @@ export default {
                     return pattern.test(replaceV) || '올바른 이메일 형식으로 입력해주세요!'
                 }
             ],
-            idPass: '',
+            idPass: false,
             memberPw: '',
             memberId: '',
             memberRole: '',
             address: '',
             phoneNumber: '',
-
+            email: '',
+            to: '',
+            isPressedButton: '',
+            emailCode: '',
+            codePass: '',
         }
     },
     methods: {
         ...mapActions(MemberModule, [
             'requestSpringToCheckIdDuplication',
-            'requestSpringToCheckEmailDuplication'
+            'requestSpringToCheckEmailDuplication',
+            'requestSpringToCheckAuthenticationCode',
         ]),
         onSubmit () {
+            if (this.$refs.form.validate()) {
+                const { email } = this
+                this.$emit("submit", { email })
+            } else {
+                alert('올바른 정보를 입력하세요!')
+            }
+
+            if (!this.emailPass) {
+                alert("이메일 중복 확인을 해주세요!")
+            }
         },
         async checkDuplicateId () {
             this.idPass = await this.requestSpringToCheckIdDuplication({ memberId: this.memberId});
-            
             console.log('idPass: ' + this.idPass);
+
             if(this.idPass == true) {
                 alert("사용할 수 있는 아이디 입니다.");
             } else {
@@ -127,8 +158,27 @@ export default {
             }
         },
         async checkDuplicateEmail () {
+            this.to = this.email;
+            const payload = { to: this.to };
+
+            console.log('to: ' + this.to);
+
+            this.emailPass = await this.requestSpringToCheckEmailDuplication(payload);
+            this.isPressedButton = true;
+        },
+        async checkDuplicateCode() {
+            const payload = { authCode: this.emailCode };
+            this.codePass = await this.requestSpringToCheckAuthenticationCode(payload);
+
+            if(this.codePass){
+                alert("이메일 인증이 완료 되었습니다.")
+            } else {
+                alert("인증 코드가 다릅니다.")
+            }
         },
         isFormValid () {
+            // return this.emailPass && this.email_rule[1](this.email) === true
+            return this.email && this.password && this.name;
         }
     },
 }

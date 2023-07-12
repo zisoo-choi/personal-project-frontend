@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
 
 } from "./mutation-types";
@@ -20,7 +21,7 @@ export default {
                 alert("문제 발생!")
             })
     },
-    // 이메일 증복 확인
+    // 이메일 중복 확인
     requestSpringToCheckEmailDuplication ({ }, payload) {
         const { email } = payload
         console.log('email: ' + email)
@@ -80,6 +81,22 @@ export default {
             .catch(() => {
                 alert('문제 발생!')
             })
-    }
+    },
+    // 로그인
+    requestLoginMemberToSpring ({}, payload) {
+        const { memberId, memberPw } = payload
+
+        return axiosInst.post('/library-member/sign-In', {
+            memberId, memberPw
+        })
+        .then((res) => {
+            if(res.data.userToken != null) {
+                localStorage.setItem("loginUserInfo", res.data.userToken);
+                alert("회원님 반갑습니다!")
+            } else {
+                alert("회원이 아닙니다.")
+            }
+            return res.data
+        })
+    },
 }
-  

@@ -21,7 +21,7 @@
             </v-btn>
 
             <v-btn v-if="isLogin" text @click="clickToggle">
-                <span>장바구니</span>
+                <span>마이페이지</span>
                 <v-icon right>mdi-hand-back-left-outline</v-icon>
             </v-btn>
             <v-btn v-if="!isLogin" text @click="signUp">
@@ -142,30 +142,43 @@ export default {
             .catch(() => {})
         },
         signIn() {
-          router.push('/sign-in')
-            .catch(() => {})
+          const loginUserInfo = localStorage.getItem("loginUserInfo");
+
+          if (loginUserInfo != null) {
+            this.isLogin = true;
+          }
+          router.push('/sign-in').catch(() => {});
         },
         signOut() {
             alert("로그아웃")
+            localStorage.removeItem("loginUserInfo")
+            this.isLogin = false;
         },
         goToHome() {
             router.push("/")
             .catch(() => {})
         },
         searchGroup() {
-          const len = this.links.length;
+          // const len = this.links.length;
 
-          for(let i = 0; i < len; i++) {
-            if(
-              this.links[i].text.includes(event.target.value) === false
-            ) {
-              document.querySelectorAll("*.group-item")[i].style.display = "none";
-            } else {
-              document.querySelectorAll("*.group-item")[i].style.display = "flex";
-            }
-          }
+          // for(let i = 0; i < len; i++) {
+          //   if(
+          //     this.links[i].text.includes(event.target.value) === false
+          //   ) {
+          //     document.querySelectorAll("*.group-item")[i].style.display = "none";
+          //   } else {
+          //     document.querySelectorAll("*.group-item")[i].style.display = "flex";
+          //   }
+          // }
         }
     },
+    mounted() {
+      this.accountId = localStorage.getItem("loginUserInfo")
+
+      if(this.accountId != null) {
+        this.isLogin = !this.isLogin
+      }
+    }
 }
 </script>
 

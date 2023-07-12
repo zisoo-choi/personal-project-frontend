@@ -97,8 +97,8 @@
                                 </div>
 
                                 <v-btn type="submit" block x-large rounded
-                                        color="orange lighten-1" class="mt-6"
-                                         >회원 신청하기</v-btn>
+                                        color="green lighten-1" class="mt-6"
+                                         ><b>회원 신청하기</b></v-btn>
                                 </v-form>
                             </v-form>
                         </v-card-text>
@@ -201,7 +201,7 @@ export default {
         // isFormValid () {
         //     :disabled="!isFormValid()"
         //     // return this.emailPass && this.email_rule[1](this.email) === true
-        //     return this.email && this.memberPw && this.memberId;
+        //     return this.email && this.codePass;
         // }
     },
 }

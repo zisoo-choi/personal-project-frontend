@@ -17,11 +17,7 @@ export default {
     methods: {
         ...mapActions(MemberModule, ['requestRegisterMemberToSpring']),
         async onSubmit (payload) {
-            const isSuccess = this.requestRegisterMemberToSpring(payload)
-            // 회원 가입 성공 시, router를 이용하여 로그인 페이지로 이동
-            if(isSuccess) {
-                  this.$router.push("/sign-in")
-            }
+            this.requestRegisterMemberToSpring(payload)
         }
     }
 }

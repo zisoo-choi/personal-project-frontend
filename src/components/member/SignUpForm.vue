@@ -3,15 +3,20 @@
         <v-container class="white">
             <v-row justify="center">
                 <v-col cols="auto" style="padding-bottom: 90px">
-                    <v-card width="460" style="margin-top: 90px">
+                    <v-card width="550" style="margin-top: 90px">
                         <v-card-text class="text-center px-12 py-16">
                             <v-form @submit.prevent="onSubmit" ref="form" class="signUpForm">
                                 <div class="text-h4 font-weight-black mb-10">회원 가입</div>
-                                <div class="d-flex" style="center;">
-                                    <input v-model="memberRole " type="radio" name="role">일반</input>
+                                <!-- <div class="d-flex" style="center;">
+                                    <input v-model="memberRole " type="radio" name="role" value="NORMAL">일반</input>
                                     &nbsp;
-                                    <input v-model="memberRole" type="radio" name="role">관리자</input>
-                                </div>
+                                    <input v-model="memberRole" type="radio" name="role" value="MANAGER">관리자</input>
+                                </div> -->
+                                <v-radio-group v-model="memberRole" row>
+                                    <v-radio label="일반" value="NORMAL"></v-radio>
+                                    <v-radio label="관리자" value="MANAGER"></v-radio>
+                                </v-radio-group>
+
                                 <div class="d-flex">
                                     <v-text-field
                                         v-model="memberId"
@@ -20,10 +25,10 @@
                                         required
                                     ></v-text-field>
                                     <v-btn text large outlined style="font-size: 13px"
-                                            class="mt-3 ml-5" color="teal lighten-1"
-                                            @click="checkDuplicateId"
-                                            :disabled="false">
-                                            아이디 <br/>중복 확인
+                                        class="mt-1 ml-2" color="teal lighten-1"
+                                        @click="checkDuplicateId"
+                                        :disabled="false">
+                                        아이디 <br/>중복 확인
                                     </v-btn>
                                 </div>
                                 <div class="d-flex">
@@ -44,8 +49,14 @@
                                         required
                                     ></v-text-field>
                                     <v-btn text large outlined style="font-size: 13px"
-                                            class="mt-3 ml-5" color="teal lighten-1"
+                                            class="mt-1 ml-2" color="teal lighten-1"
                                             @click="checkDuplicateEmail"
+                                            :disabled="false">
+                                            이메일 <br/>중복 확인
+                                    </v-btn>
+                                    <v-btn text large outlined style="font-size: 13px"
+                                            class="mt-1 ml-2" color="teal lighten-1"
+                                            @click="checkAuthenticationEmail"
                                             :disabled="false">
                                             google</br>이메일 인증
                                     </v-btn>
@@ -87,7 +98,7 @@
 
                                 <v-btn type="submit" block x-large rounded
                                         color="orange lighten-1" class="mt-6"
-                                        :disabled="!isFormValid()">회원 신청하기</v-btn>
+                                         >회원 신청하기</v-btn>
                                 </v-form>
                             </v-form>
                         </v-card-text>
@@ -106,8 +117,18 @@ const MemberModule = 'MemberModule'
 export default {
     data () {
         return {
-            email: "",
             emailPass: false,
+            idPass: false,
+            codePass: '',
+            memberId: '',
+            memberPw: '',
+            memberRole: '',
+            address: '',
+            phoneNumber: '',
+            email: '',
+            to: '',
+            isPressedButton: '',
+            emailCode: '',
             email_rule: [
                 v => !!v || '이메일을 입력해주세요!',
                 v => {
@@ -116,54 +137,55 @@ export default {
                     return pattern.test(replaceV) || '올바른 이메일 형식으로 입력해주세요!'
                 }
             ],
-            idPass: false,
-            memberPw: '',
-            memberId: '',
-            memberRole: '',
-            address: '',
-            phoneNumber: '',
-            email: '',
-            to: '',
-            isPressedButton: '',
-            emailCode: '',
-            codePass: '',
         }
     },
     methods: {
         ...mapActions(MemberModule, [
-            'requestSpringToCheckIdDuplication',
-            'requestSpringToCheckEmailDuplication',
+            'requestSpringToCheckIdAuthentication',
+            'requestSpringToCheckEmailAuthentication',
             'requestSpringToCheckAuthenticationCode',
+            'requestSpringToCheckEmailDuplication'
         ]),
         onSubmit () {
             if (this.$refs.form.validate()) {
-                const { email } = this
-                this.$emit("submit", { email })
-            } else {
+                const { memberId, memberPw, email, address, phoneNumber, memberRole } = this
+                this.$emit("submit", { memberId, memberPw, email, address, phoneNumber, memberRole })
+            }
+            else { 
                 alert('올바른 정보를 입력하세요!')
             }
 
-            if (!this.emailPass) {
-                alert("이메일 중복 확인을 해주세요!")
-            }
+            // if (!this.emailPass) {
+            //     alert("이메일 중복 확인을 해주세요!")
+            // }
         },
         async checkDuplicateId () {
-            this.idPass = await this.requestSpringToCheckIdDuplication({ memberId: this.memberId});
+            this.idPass = await this.requestSpringToCheckIdAuthentication({ memberId: this.memberId});
             console.log('idPass: ' + this.idPass);
 
-            if(this.idPass == true) {
-                alert("사용할 수 있는 아이디 입니다.");
-            } else {
+            if(this.idPass == false) {
                 alert("중복된 아이디 입니다.");
             }
         },
         async checkDuplicateEmail () {
+            const emailValid = this.email.match(
+                /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            )
+            this.emailPass = false
+
+            if (emailValid) {
+                const { email } = this
+                console.log('before actions - email: ' + email)
+                this.emailPass = await this.requestSpringToCheckEmailDuplication({ email })
+            }
+        },
+        async checkAuthenticationEmail () {
             this.to = this.email;
             const payload = { to: this.to };
 
             console.log('to: ' + this.to);
 
-            this.emailPass = await this.requestSpringToCheckEmailDuplication(payload);
+            this.emailPass = await this.requestSpringToCheckEmailAuthentication(payload);
             this.isPressedButton = true;
         },
         async checkDuplicateCode() {
@@ -176,10 +198,11 @@ export default {
                 alert("인증 코드가 다릅니다.")
             }
         },
-        isFormValid () {
-            // return this.emailPass && this.email_rule[1](this.email) === true
-            return this.email && this.password && this.name;
-        }
+        // isFormValid () {
+        //     :disabled="!isFormValid()"
+        //     // return this.emailPass && this.email_rule[1](this.email) === true
+        //     return this.email && this.memberPw && this.memberId;
+        // }
     },
 }
 

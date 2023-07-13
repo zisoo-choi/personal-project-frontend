@@ -13,7 +13,6 @@ export default {
         return axiosInst.get(`/library-member/cheke-id/${memberId}`)
             .then((res) => {
                 if (res) {
-                    alert('사용 가능한 아이디입니다!')
                     return res.data
                 }
             })
@@ -73,10 +72,13 @@ export default {
             .then((res) => {
                 if(res.data == true){
                     alert('회원 가입 성공!')
+                    return res.data
                 }
                 if(res.data != true){
                     alert("회원 가입 실패")
+                    return res.data 
                 }
+                return res.data
             })
             .catch(() => {
                 alert('문제 발생!')

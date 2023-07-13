@@ -7,16 +7,10 @@
                         <v-card-text class="text-center px-12 py-16">
                             <v-form @submit.prevent="onSubmit" ref="form" class="signUpForm">
                                 <div class="text-h4 font-weight-black mb-10">회원 가입</div>
-                                <!-- <div class="d-flex" style="center;">
-                                    <input v-model="memberRole " type="radio" name="role" value="NORMAL">일반</input>
-                                    &nbsp;
-                                    <input v-model="memberRole" type="radio" name="role" value="MANAGER">관리자</input>
-                                </div> -->
                                 <v-radio-group v-model="memberRole" row>
                                     <v-radio label="일반" value="NORMAL"></v-radio>
                                     <v-radio label="관리자" value="MANAGER"></v-radio>
                                 </v-radio-group>
-
                                 <div class="d-flex">
                                     <v-text-field
                                         v-model="memberId"
@@ -98,7 +92,7 @@
 
                                 <v-btn type="submit" block x-large rounded
                                         color="green lighten-1" class="mt-6"
-                                         ><b>회원 신청하기</b></v-btn>
+                                        :disabled="!isFormValid()" ><b>회원 신청하기</b></v-btn>
                                 </v-form>
                             </v-form>
                         </v-card-text>
@@ -122,7 +116,7 @@ export default {
             codePass: '',
             memberId: '',
             memberPw: '',
-            memberRole: '',
+            memberRole: 'NORMAL',
             address: '',
             phoneNumber: '',
             email: '',
@@ -165,6 +159,8 @@ export default {
 
             if(this.idPass == false) {
                 alert("중복된 아이디 입니다.");
+            } else {
+                alert("사용 가능한 아이디입니다 !");
             }
         },
         async checkDuplicateEmail () {
@@ -198,14 +194,12 @@ export default {
                 alert("인증 코드가 다릅니다.")
             }
         },
-        // isFormValid () {
-        //     :disabled="!isFormValid()"
-        //     // return this.emailPass && this.email_rule[1](this.email) === true
-        //     return this.email && this.codePass;
-        // }
+        isFormValid () {
+            return this.memberId && this.memberPw && this.email && this.codePass;
+            // return true // 테스트 용으로 일단 다 true
+        },
     },
 }
-
 </script>
 
 <style>

@@ -17,12 +17,12 @@ export default {
     methods: {
         ...mapActions(MemberModule, ['requestLoginMemberToSpring']),
         async onSubmit (payload) {
-            // alert("로그인 버튼이 눌렸습니다.")
-            const userToken = this.requestLoginMemberToSpring(payload)
+            const userToken = await this.requestLoginMemberToSpring(payload)
             
             if(userToken != null) {
                 this.$router.push("/")
             }
+
         }
     }
 }

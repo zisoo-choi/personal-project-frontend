@@ -17,7 +17,11 @@ export default {
     methods: {
         ...mapActions(MemberModule, ['requestRegisterMemberToSpring']),
         async onSubmit (payload) {
-            this.requestRegisterMemberToSpring(payload)
+            const signUpComplete = this.requestRegisterMemberToSpring(payload)
+
+            if(signUpComplete != false) {
+                this.$router.push("/sign-in")
+            }
         }
     }
 }

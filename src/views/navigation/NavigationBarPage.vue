@@ -1,6 +1,6 @@
 <template lang="">
     <nav>
-        <v-app-bar color="white" app>
+        <v-app-bar color="white" app elevation="0">
             <v-app-bar-nav-icon color="black" @click="navigation_drawer = !navigation_drawer"/>
             <!-- 로고가 들어갈 타이틀 문구 있는 곳 -->
             <v-btn depressed color="white" @click="goToHome">
@@ -20,7 +20,7 @@
                 <v-icon right>mdi-book</v-icon>
             </v-btn>
 
-            <v-btn v-if="isLogin" text @click="clickToggle">
+            <v-btn v-if="isLogin" text @click="myPage">
                 <span>마이페이지</span>
                 <v-icon right>mdi-hand-back-left-outline</v-icon>
             </v-btn>
@@ -40,41 +40,41 @@
         
         <!-- 왼쪽에서 등장하는 바 -->
         <v-navigation-drawer app v-model="navigation_drawer">
-        <v-list-item>
-            <v-list-item-content>
-            <v-list-item-title class="text-h6">CLOUD</v-list-item-title>
-            <v-list-item-subtitle>LIBRARY</v-list-item-subtitle>
-            </v-list-item-content>
-        </v-list-item>
+          <v-list-item>
+              <v-list-item-content>
+              <v-list-item-title class="text-h6">CLOUD</v-list-item-title>
+              <v-list-item-subtitle>LIBRARY</v-list-item-subtitle>
+              </v-list-item-content>
+          </v-list-item>
 
-        <v-divider></v-divider>
-        <v-sheet class="pa-4 primary lighten-2">
-          <v-text-field
-            v-model="search"
-            label="서비스 검색"
-            dark
-            flat
-            solo-inverted
-            hide-details
-            clearable
-            clear-icon="mdi-close-circle-outline"
-            @input="searchGroup" />
+          <v-divider></v-divider>
+          <v-sheet class="pa-4 primary lighten-2">
+            <v-text-field
+              v-model="search"
+              label="서비스 검색"
+              dark
+              flat
+              solo-inverted
+              hide-details
+              clearable
+              clear-icon="mdi-close-circle-outline"
+              @input="searchGroup" />
 
-          <v-checkbox
-            v-model="caseSensitive"
-            dark
-            hide-details
-            label="Case sensitive search"
-          ></v-checkbox>
-        </v-sheet>
+            <v-checkbox
+              v-model="caseSensitive"
+              dark
+              hide-details
+              label="Case sensitive search"
+            ></v-checkbox>
+          </v-sheet>
 
-        <v-list nav dense>
-          <v-list-item
-            v-for="(link, index) in links"
-            :key="link.index"
-            router
-            :to="link.route"
-          >
+          <v-list nav dense>
+            <v-list-item
+              v-for="(link, index) in links"
+              :key="link.index"
+              router
+              :to="link.route"
+            >
             <v-list-item-action>
               <v-icon>
                 {{ link.icon }}
@@ -130,7 +130,8 @@ export default {
                 { title: '희망도서' },
                 { title: '전체도서' },
             ],
-            isLogin: false
+            isLogin: false,
+            loginUserInfo: '',
         };
     },
     methods: {
@@ -142,22 +143,27 @@ export default {
             .catch(() => {})
         },
         signIn() {
-          const loginUserInfo = localStorage.getItem("loginUserInfo");
-
-          if (loginUserInfo != null) {
+          router.push('/sign-in')
+          .catch(() => {});
+          this.loginUserInfo = localStorage.getItem("loginUserInfo");
+          if (this.loginUserInfo != null) {
             this.isLogin = true;
           }
-          router.push('/sign-in').catch(() => {});
         },
         signOut() {
-            alert("로그아웃")
-            localStorage.removeItem("loginUserInfo")
-            this.isLogin = false;
+          localStorage.removeItem("loginUserInfo")
+          this.isLogin = false;
+          alert("로그아웃 되었습니다.")
+
         },
         goToHome() {
             router.push("/")
             .catch(() => {})
         },
+        // myPage() {
+        //   router.push("/myPage")
+        //     .catch(() => {})
+        // },
         searchGroup() {
           // const len = this.links.length;
 
@@ -170,15 +176,18 @@ export default {
           //     document.querySelectorAll("*.group-item")[i].style.display = "flex";
           //   }
           // }
-        }
-    },
-    mounted() {
-      this.accountId = localStorage.getItem("loginUserInfo")
+        },
+      },
+      mounted() {
+        this.loginUserInfo = localStorage.getItem("loginUserInfo")
 
-      if(this.accountId != null) {
-        this.isLogin = !this.isLogin
+        return (this.isLogin ? this.isLogin=false : this.isLogin=true)
+
+        // if(this.loginUserInfo != null) {
+        //   this.isLogin = true
+        // }
+        
       }
-    }
 }
 </script>
 

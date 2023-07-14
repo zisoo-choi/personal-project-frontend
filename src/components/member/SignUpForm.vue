@@ -76,8 +76,30 @@
                                     <v-text-field
                                         v-model="address"
                                         label="주소"
+                                        name="address"
+                                        type="text"
                                         :disabled="false"
                                         required
+                                        readonly
+                                    ></v-text-field>
+                                    <v-btn
+                                        text
+                                        large
+                                        outlined
+                                        style="font-size: 13px"
+                                        class="mt-1 ml-2"
+                                        color="teal lighten-1"
+                                        @click="FindAddress"
+                                    >
+                                        주소 찾기
+                                    </v-btn>
+                                    </div>
+                                    <div class="d-flex">
+                                    <v-text-field
+                                        v-model="address_detail"
+                                        label="상세 주소"
+                                        name="address_detail"
+                                        type="text"
                                     ></v-text-field>
                                 </div>
 
@@ -118,6 +140,7 @@ export default {
             memberPw: '',
             memberRole: 'NORMAL',
             address: '',
+            address_detail: '',
             phoneNumber: '',
             email: '',
             to: '',
@@ -140,8 +163,24 @@ export default {
             'requestSpringToCheckAuthenticationCode',
             'requestSpringToCheckEmailDuplication'
         ]),
+        FindAddress() {
+            const self = this; // this 컨텍스트를 저장
+
+            new daum.Postcode({
+                oncomplete: function(data) {
+                if (data.userSelectedType === 'R') {
+                    self.address = data.roadAddress; // 도로명 주소 설정
+                } else {
+                    self.address = data.jibunAddress; // 지번 주소 설정
+                }
+
+                self.address_detail = ''; // 상세 주소 초기화
+                },
+            }).open();
+        },
         onSubmit () {
             if (this.$refs.form.validate()) {
+                this.address = this.address + " " + this.address_detail
                 const { memberId, memberPw, email, address, phoneNumber, memberRole } = this
                 this.$emit("submit", { memberId, memberPw, email, address, phoneNumber, memberRole })
             }

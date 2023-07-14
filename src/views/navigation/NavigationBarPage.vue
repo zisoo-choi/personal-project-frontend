@@ -39,7 +39,7 @@
         </v-app-bar>
         
         <!-- 왼쪽에서 등장하는 바 -->
-        <v-navigation-drawer app v-model="navigation_drawer">
+        <v-navigation-drawer app v-model="navigation_drawer" v-if="navigation_drawer">
           <v-list-item>
               <v-list-item-content>
               <v-list-item-title class="text-h6">CLOUD</v-list-item-title>
@@ -145,10 +145,14 @@ export default {
         signIn() {
           router.push('/sign-in')
           .catch(() => {});
-          this.loginUserInfo = localStorage.getItem("loginUserInfo");
-          if (this.loginUserInfo != null) {
-            this.isLogin = true;
-          }
+
+          // 아래 사항을 제대로 안해주는 것으로 보임
+          // 늦게 변환이 되는 것으로 보임
+          // -> 그래서 새로고침을 하기 전까지는 안 보여줌
+          // this.loginUserInfo = localStorage.getItem("loginUserInfo");
+          // if(this.loginUserInfo != null) {
+          //   this.isLogin = true;
+          // }
         },
         signOut() {
           localStorage.removeItem("loginUserInfo")
@@ -160,10 +164,10 @@ export default {
             router.push("/")
             .catch(() => {})
         },
-        // myPage() {
-        //   router.push("/myPage")
-        //     .catch(() => {})
-        // },
+        myPage() {
+          router.push("/my-Page")
+            .catch(() => {})
+        },
         searchGroup() {
           // const len = this.links.length;
 
@@ -180,13 +184,7 @@ export default {
       },
       mounted() {
         this.loginUserInfo = localStorage.getItem("loginUserInfo")
-
-        return (this.isLogin ? this.isLogin=false : this.isLogin=true)
-
-        // if(this.loginUserInfo != null) {
-        //   this.isLogin = true
-        // }
-        
+        this.isLogin = this.loginUserInfo !== null;
       }
 }
 </script>

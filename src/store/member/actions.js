@@ -1,8 +1,3 @@
-import axios from "axios";
-import {
-
-} from "./mutation-types";
-
 import axiosInst from "@/utility/axiosInst";
 
 export default {
@@ -95,10 +90,11 @@ export default {
             if(res.data.userToken != null) {
                 localStorage.setItem("loginUserInfo", res.data.userToken);
                 alert("회원님 반갑습니다!")
+                return res.data.userToken
             } else {
                 alert("회원이 아닙니다.")
+                return res.data.userToken
             }
-            return res.data
         })
     },
 }

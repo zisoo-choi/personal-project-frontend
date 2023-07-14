@@ -3,12 +3,14 @@ import VueRouter from 'vue-router'
 
 import navigationRoutes from './navigation'
 import memberRoutes from './member'
+import bookRoutes from './book'
 
 Vue.use(VueRouter)
 
 const routes = [
   ...navigationRoutes,
   ...memberRoutes,
+  ...bookRoutes,
 ]
 
 const router = new VueRouter({

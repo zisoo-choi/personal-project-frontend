@@ -15,10 +15,43 @@
             <v-spacer></v-spacer>
 
             <!-- 네비게이션 목록 -->
-            <v-btn text @click="clickToggle">
-                <span>category</span>
-                <v-icon right>mdi-book</v-icon>
-            </v-btn>
+            <div class="text-center">
+              <v-menu offset-y open-on-hover elevation="0">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    color="white"
+                    v-bind="attrs"
+                    v-on="on"
+                    depressed
+                  >
+                    <span>category</span>
+                    <v-icon>mdi-book</v-icon>
+                  </v-btn>
+                </template>
+                <v-list>
+                  <v-list-item link>
+                    <v-list-item-title
+                      @click="newBook">
+                    신착 도서
+                    </v-list-item-title>
+                  </v-list-item>
+
+                  <v-list-item link>
+                    <v-list-item-title
+                      @click="hopeBook" >
+                      희망 도서
+                    </v-list-item-title>
+                  </v-list-item>
+
+                  <v-list-item link>
+                    <v-list-item-title
+                      @click="wholeBook">
+                      전체 도서
+                    </v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+            </div>
 
             <v-btn v-if="isLogin" text @click="myPage">
                 <span>마이페이지</span>
@@ -39,7 +72,11 @@
         </v-app-bar>
         
         <!-- 왼쪽에서 등장하는 바 -->
-        <v-navigation-drawer app v-model="navigation_drawer" v-if="navigation_drawer">
+        <v-navigation-drawer
+          @click="navDrawer"
+          app 
+          v-model="navigation_drawer"
+          v-if="navigation_drawer">
           <v-list-item>
               <v-list-item-content>
               <v-list-item-title class="text-h6">CLOUD</v-list-item-title>
@@ -135,8 +172,17 @@ export default {
         };
     },
     methods: {
-        clickToggle() {
-          alert("도서 카테고리 -> 나중에 슬롯 걸어야 함");
+        newBook() {
+          router.push("/new-book")
+            .catch(() => {})
+        },
+        hopeBook() {
+          router.push("/hope-book")
+            .catch(() => {})
+        },
+        wholeBook() {
+          router.push("/whole-book")
+            .catch(() => {})
         },
         signUp() {
           router.push('/sign-up')
@@ -167,6 +213,9 @@ export default {
         myPage() {
           router.push("/my-Page")
             .catch(() => {})
+        },
+        navDrawer() {
+          this.navigation_drawer = !this.navigation_drawer
         },
         searchGroup() {
           // const len = this.links.length;

@@ -1,4 +1,4 @@
-FROM node:18 AS bulid-stage
+FROM node:18 AS build-stage
 
 WORKDIR /app
 COPY package*.json ./

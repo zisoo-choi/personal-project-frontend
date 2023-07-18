@@ -83,7 +83,7 @@ export default {
     requestLoginMemberToSpring ({}, payload) {
         const { memberId, memberPw } = payload
 
-        return axiosInst.post('/library-member/sign-In', {
+        return axiosInst.post('/library-member/sign-in', {
             memberId, memberPw
         })
         .then((res) => {

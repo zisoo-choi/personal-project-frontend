@@ -194,8 +194,9 @@ export default {
         },
         async checkDuplicateId () {
             this.idPass = await this.requestSpringToCheckIdAuthentication({ memberId: this.memberId});
+            console.log('memberId: ' + this.memberId);
             console.log('idPass: ' + this.idPass);
-
+            
             if(this.idPass == false) {
                 alert("중복된 아이디 입니다.");
             } else {

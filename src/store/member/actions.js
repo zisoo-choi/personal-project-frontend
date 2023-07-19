@@ -7,7 +7,7 @@ export default {
 
         return axiosInst.get(`/library-member/check-id/${memberId}`)
             .then((res) => {
-                if (res.data) {
+                if (res) {
                     return res.data;
                 }
             })

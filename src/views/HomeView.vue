@@ -1,15 +1,15 @@
 <template lang="">
-    <v-container>
-    <home-carousel-model />
-    <div class="HomeBtn">
-      <v-btn>이용</br>안내</v-btn>
-      <v-btn>회원</br>혜택</v-btn>
-      <v-btn>도서관</br>행사</v-btn>
-      <v-btn>도서관</br>소식</v-btn>
-      <v-btn>new</br>서점</v-btn>
+    <div class="fullView">
+      <!-- <home-carousel-model /> -->
+      <home-book-recommend />
+      <div class="HomeBtn">
+        <v-btn style="margin:35px; color:white; background-color:rgb(41, 41, 41); width:90px; height: 60px;">이용 안내</v-btn>
+        <v-btn style="margin:35px; color:white; background-color:rgb(41, 41, 41); width:90px; height: 60px;">회원 혜택</v-btn>
+        <v-btn style="margin:35px; color:white; background-color:rgb(41, 41, 41); width:90px; height: 60px;">도서관</br>행사</v-btn>
+        <v-btn style="margin:35px; color:white; background-color:rgb(41, 41, 41); width:90px; height: 60px;">도서관</br>소식</v-btn>
+        <v-btn style="margin:35px; color:white; background-color:rgb(41, 41, 41); width:90px; height: 60px;">new</br>서점</v-btn>
+      </div>
     </div>
-    <home-book-recommend />
-  </v-container>
 </template>
 
 <script>
@@ -23,7 +23,7 @@ export default {
   },
   components: {
     HomeBookRecommend,
-    HomeCarouselModel
+    HomeCarouselModel,
   },
   methods: {
   },

@@ -1,5 +1,6 @@
 <template lang="">
-    <div class="carousel-container">
+    <v-container class="carousel-container">
+      <h2>NEW BOOK</h2>
       <v-carousel hide-delimiters :cycle="cycle" :interval="interval" :height="height" v-model="model">
         <v-carousel-item v-for="(picture, idx) in bannerPictures" :key="idx">
           <v-sheet :height="height / 2" tile>
@@ -11,7 +12,7 @@
           </v-sheet>
         </v-carousel-item>
       </v-carousel>
-    </div>
+    </v-container>
 </template>
 
 <script>

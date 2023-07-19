@@ -148,7 +148,9 @@
 
 <script>
 import router from "@/router";
+import MemberModule from "@/store/member/MemberModule";
 import NavigationSearchBarPage from "@/views/navigation/NavigationSearchBarPage.vue";
+import { mapActions } from "vuex";
 
 export default {
   components: { NavigationSearchBarPage },
@@ -168,10 +170,11 @@ export default {
                 { title: '전체도서' },
             ],
             isLogin: false,
-            loginUserInfo: '',
+            loginUserInfo: ''
         };
     },
     methods: {
+      ...mapActions(MemberModule, 'requestMemberLoginOutToSpring'),
         newBook() {
           router.push("/new-book")
             .catch(() => {})
@@ -191,20 +194,15 @@ export default {
         signIn() {
           router.push('/sign-in')
           .catch(() => {});
-
-          // 아래 사항을 제대로 안해주는 것으로 보임
-          // 늦게 변환이 되는 것으로 보임
-          // -> 그래서 새로고침을 하기 전까지는 안 보여줌
-          // this.loginUserInfo = localStorage.getItem("loginUserInfo");
-          // if(this.loginUserInfo != null) {
-          //   this.isLogin = true;
-          // }
         },
         signOut() {
-          localStorage.removeItem("loginUserInfo")
-          this.isLogin = false;
-          alert("로그아웃 되었습니다.")
-
+          this.loginUserInfo = localStorage.getItem("accessToken")
+          if(this.loginUserInfo != null) {
+            localStorage.removeItem("accessToken")
+            localStorage.removeItem("refreshToken")
+            location.reload()
+            alert("로그아웃 되었습니다.")
+          }
         },
         goToHome() {
             router.push("/")
@@ -232,9 +230,14 @@ export default {
         },
       },
       mounted() {
-        this.loginUserInfo = localStorage.getItem("loginUserInfo")
-        this.isLogin = this.loginUserInfo !== null;
-      }
+        this.loginUserInfo = localStorage.getItem("accessToken");
+
+        if(this.loginUserInfo != null) {
+          this.isLogin = true;
+          router.push("/")
+            .catch(() => {})
+        }
+      },
 }
 </script>
 

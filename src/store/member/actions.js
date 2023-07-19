@@ -5,14 +5,15 @@ export default {
     requestSpringToCheckIdAuthentication ({}, payload) {
         const { memberId } = payload
 
-        return axiosInst.get(`/library-member/cheke-id/${memberId}`)
+        return axiosInst.get(`/library-member/check-id/${memberId}`)
             .then((res) => {
-                if (res) {
-                    return res.data
+                if (res.data) {
+                    return res.data;
                 }
             })
             .catch((error) => {
-                alert("문제 발생!")
+                console.error('문제 발생:', error);
+                throw error;
             })
     },
     // 이메일 중복 확인
@@ -83,18 +84,25 @@ export default {
     requestLoginMemberToSpring ({}, payload) {
         const { memberId, memberPw } = payload
 
-        return axiosInst.post('/library-member/sign-in', {
+        return axiosInst.post('/application/json', {
             memberId, memberPw
         })
         .then((res) => {
-            if(res.data.userToken != null) {
-                localStorage.setItem("loginUserInfo", res.data.userToken);
-                alert("회원님 반갑습니다!")
-                return res.data.userToken
+            if (res.data.accessToken) {
+              const { accessToken, refreshToken } = res.data;
+              localStorage.setItem('accessToken', accessToken);
+              localStorage.setItem('refreshToken', refreshToken);
+              location.reload()
+              alert('회원님 반갑습니다!');
+              return accessToken;
             } else {
-                alert("회원이 아닙니다.")
-                return res.data.userToken
+              alert('회원이 아닙니다.');
+              return null;
             }
-        })
+          })
+          .catch((error) => {
+            console.error('로그인 실패:', error);
+            throw error;
+          });
     },
 }

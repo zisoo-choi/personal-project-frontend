@@ -1,6 +1,18 @@
 <template lang="">
     <div class="full">
     </br>
+        <h3>전체 도서 목록</h3>
+        <div class="categoryBtn">
+            <v-btn color="white" v-model="philosophy" @click="handleCategoryClick('PHILOSOPHY')">철학</v-btn>
+            <v-btn color="white" v-model="religion" @click="handleCategoryClick('RELIGION')">종교</v-btn>
+            <v-btn color="white" v-model="socialScience" @click="handleCategoryClick('SOCIAL_SCIENCE')">사회과학</v-btn>
+            <v-btn color="white" v-model="naturalScience" @click="handleCategoryClick('NATURAL_SCIENCE')">자연과학</v-btn>
+            <v-btn color="white" v-model="technology" @click="handleCategoryClick('TECHNOLOGY')">기술과학</v-btn>
+            <v-btn color="white" v-model="art" @click="handleCategoryClick('ART')">예술</v-btn>
+            <v-btn color="white" v-model="language" @click="handleCategoryClick('LANGUAGE')">언어</v-btn>
+            <v-btn color="white" v-model="literature" @click="handleCategoryClick('LITERATURE')">문학</v-btn>
+            <v-btn color="white" v-model="history" @click="handleCategoryClick('HISTORY')">역사</v-btn>
+        </div>
         <whole-book-form :books="books"/>
         <whole-design-book-form :books="books" />
     </div>
@@ -14,6 +26,19 @@ import WholeDesignBookForm from "@/components/book/WholeDesignBookForm.vue";
 const BookModule = 'BookModule';
 
 export default {
+    data() {
+        return {
+            philosophy: '',
+            religion: '',
+            socialScience: '',
+            naturalScience: '',
+            technology: '',
+            art: '',
+            language: '',
+            literature: '',
+            history: ''
+        }
+    },
     name: "WholeBookPage",
     components: { WholeBookForm, WholeDesignBookForm },
     computed: {
@@ -23,10 +48,10 @@ export default {
         this.requestBookListToSpring();
     },
     methods: {
-        ...mapActions(BookModule, ["requestBookListToSpring"]),
-        philosophy() {
-
-        }
+        ...mapActions(BookModule, ["requestBookListToSpring", "requestCategoryListToSpring"]),
+        handleCategoryClick(categorizationSymbol) {
+            this.requestCategoryListToSpring(categorizationSymbol);
+        },
     }
 }
 </script>

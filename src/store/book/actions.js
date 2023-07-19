@@ -11,6 +11,12 @@ export default {
             .then((res) => {
                 commit(REQUEST_BOOK_LIST_TO_SPRING, res.data);
             })
+    },
+    requestCategoryListToSpring({ commit }, categorizationSymbol) {
+        return axiosInst.get(`/book-list/${categorizationSymbol}`)
+        .then((res) => {
+            commit(REQUEST_BOOK_LIST_TO_SPRING, res.data);
+        })
     }
     
 }

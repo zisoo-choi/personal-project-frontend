@@ -1,17 +1,5 @@
 <template lang="">
     <div>
-        <h3>전체 도서 목록</h3>
-        <div class="categoryBtn">
-            <v-btn color="white" @click="philosophy">철학</v-btn>
-            <v-btn color="white" @click="religion">종교</v-btn>
-            <v-btn color="white" @click="socialScience">사회과학</v-btn>
-            <v-btn color="white" @click="naturalScience">자연과학</v-btn>
-            <v-btn color="white" @click="technology">기술과학</v-btn>
-            <v-btn color="white" @click="art">예술</v-btn>
-            <v-btn color="white" @click="language">언어</v-btn>
-            <v-btn color="white" @click="literature">문학</v-btn>
-            <v-btn color="white" @click="history">역사</v-btn>
-        </div>
         <table style="margin: 10px">
             <tr>
                 <th align="center" width="5%">도서 번호</th>
@@ -55,9 +43,9 @@
 export default {
     props: {
         books: {
-        type: Array,
+            type: Array,
         },
-  },
+    },
 };
 </script>
   

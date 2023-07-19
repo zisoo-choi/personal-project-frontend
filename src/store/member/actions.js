@@ -1,4 +1,5 @@
 import axiosInst from "@/utility/axiosInst";
+import Cookies from "js-cookie";
 
 export default {
     // 아이디 중복 확인
@@ -90,8 +91,8 @@ export default {
         .then((res) => {
             if (res.data.accessToken) {
               const { accessToken, refreshToken } = res.data;
-              localStorage.setItem('accessToken', accessToken);
-              localStorage.setItem('refreshToken', refreshToken);
+              Cookies.set('accessToken', accessToken);
+              Cookies.set('refreshToken', refreshToken);
               location.reload()
               alert('회원님 반갑습니다!');
               return accessToken;

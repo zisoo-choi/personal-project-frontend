@@ -148,6 +148,7 @@
 
 <script>
 import router from "@/router";
+import Cookies from "js-cookie";
 import MemberModule from "@/store/member/MemberModule";
 import NavigationSearchBarPage from "@/views/navigation/NavigationSearchBarPage.vue";
 import { mapActions } from "vuex";
@@ -196,12 +197,12 @@ export default {
           .catch(() => {});
         },
         signOut() {
-          this.loginUserInfo = localStorage.getItem("accessToken")
-          if(this.loginUserInfo != null) {
-            localStorage.removeItem("accessToken")
-            localStorage.removeItem("refreshToken")
-            location.reload()
-            alert("로그아웃 되었습니다.")
+          const accessToken = Cookies.get('accessToken');
+          if (accessToken != null) {
+            Cookies.remove('accessToken');
+            Cookies.remove('refreshToken');
+            location.reload();
+            alert('로그아웃 되었습니다.');
           }
         },
         goToHome() {
@@ -230,12 +231,11 @@ export default {
         },
       },
       mounted() {
-        this.loginUserInfo = localStorage.getItem("accessToken");
+        this.loginUserInfo = Cookies.get('accessToken');
 
-        if(this.loginUserInfo != null) {
-          this.isLogin = true;
-          router.push("/")
-            .catch(() => {})
+        if (this.loginUserInfo != null) {
+            this.isLogin = true;
+            router.push('/').catch(() => {});
         }
       },
 }

@@ -2,6 +2,7 @@
     <div class="full">
     </br>
         <h3>전체 도서 목록</h3>
+        <v-btn @click="bookRegister" @submit="onSubmit">도서 등록</v-btn>
         <div class="categoryBtn">
             <v-btn color="white" v-model="philosophy" @click="initializationClick">전체</v-btn>
             <v-btn color="white" v-model="philosophy" @click="handleCategoryClick('PHILOSOPHY')">철학</v-btn>
@@ -15,14 +16,12 @@
             <v-btn color="white" v-model="history" @click="handleCategoryClick('HISTORY')">역사</v-btn>
         </div>
         <whole-book-form :books="books"/>
-        <!-- <whole-design-book-form :books="books" /> -->
     </div>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
 import WholeBookForm from "@/components/book/WholeBookForm.vue";
-import WholeDesignBookForm from "@/components/book/WholeDesignBookForm.vue";
 
 const BookModule = 'BookModule';
 
@@ -41,7 +40,7 @@ export default {
         }
     },
     name: "WholeBookPage",
-    components: { WholeBookForm, WholeDesignBookForm },
+    components: { WholeBookForm },
     computed: {
         ...mapState(BookModule, ["books"]),
     },
@@ -55,6 +54,14 @@ export default {
         },
         initializationClick() {
             this.requestBookListToSpring();
+        },
+        bookRegister() {
+            this.$router.push({
+                name: "RegisterBookPage"
+            });
+        },
+        onSubmit(payload) {
+
         }
     }
 }

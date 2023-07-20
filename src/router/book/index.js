@@ -6,6 +6,7 @@ import HopeBookPage from '@/views/book/HopeBookPage.vue'
 import WholeBookPage from '@/views/book/WholeBookPage.vue'
 import ReadBookPage from '@/views/book/ReadBookPage.vue'
 import ModifyBookPage from '@/views/book/ModifyBookPage.vue'
+import RegisterBookPage from "@/views/book/RegisterBookPage.vue"
 
 Vue.use(VueRouter)
 
@@ -44,6 +45,11 @@ const bookRoutes = [
     props: {
       default: true
     }
+  },
+  {
+    path: '/register-book',
+    name: 'RegisterBookPage',
+    component: RegisterBookPage
   },
 ]
 

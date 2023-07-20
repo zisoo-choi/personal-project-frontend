@@ -3,6 +3,7 @@
     </br>
         <h3>전체 도서 목록</h3>
         <div class="categoryBtn">
+            <v-btn color="white" v-model="philosophy" @click="initializationClick">전체</v-btn>
             <v-btn color="white" v-model="philosophy" @click="handleCategoryClick('PHILOSOPHY')">철학</v-btn>
             <v-btn color="white" v-model="religion" @click="handleCategoryClick('RELIGION')">종교</v-btn>
             <v-btn color="white" v-model="socialScience" @click="handleCategoryClick('SOCIAL_SCIENCE')">사회과학</v-btn>
@@ -14,7 +15,7 @@
             <v-btn color="white" v-model="history" @click="handleCategoryClick('HISTORY')">역사</v-btn>
         </div>
         <whole-book-form :books="books"/>
-        <whole-design-book-form :books="books" />
+        <!-- <whole-design-book-form :books="books" /> -->
     </div>
 </template>
 
@@ -52,6 +53,9 @@ export default {
         handleCategoryClick(categorizationSymbol) {
             this.requestCategoryListToSpring(categorizationSymbol);
         },
+        initializationClick() {
+            this.requestBookListToSpring();
+        }
     }
 }
 </script>

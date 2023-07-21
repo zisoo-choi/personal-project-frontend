@@ -59,5 +59,37 @@ export default {
           .catch(() => {
             alert("문제 발생!");
           });
+    },
+    requestRegisterBookToSpring({}, payload) {
+
+        // axios의 기본 설정에 토큰을 포함시킵니다.
+        const yourJwtToken = Cookies.get("refreshToken");
+        axiosInst.defaults.headers.common['Authorization'] = `Bearer ${yourJwtToken}`;
+        
+        const {
+            bookName,
+            author,
+            publishCompany,
+            categorizationSymbol,
+            content,
+            updateDate,
+            bookAmount
+        } = payload;
+
+        return axiosInst.post("/book-list/register-book", {
+            bookName,
+            author,
+            publishCompany,
+            categorizationSymbol,
+            content,
+            updateDate,
+            bookAmount
+        }).then((res) => {
+            alert("게시물 등록 성공!");
+            return res;
+        })
+        .catch(() => {
+            alert("문제 발생!")
+        })
     }
 }

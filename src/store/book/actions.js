@@ -91,5 +91,11 @@ export default {
         .catch(() => {
             alert("문제 발생!")
         })
-    }
+    },
+    requestNewBookListToSpring({ commit }) {
+        return axiosInst.get("/book-list/registration-date")
+        .then((res) => {
+            commit(REQUEST_BOOK_LIST_TO_SPRING, res.data);
+        })
+    },
 }

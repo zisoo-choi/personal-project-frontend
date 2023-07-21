@@ -1,5 +1,5 @@
 <template lang="">
-    <div>
+     <div>
         <tr v-if="!books || (Array.isArray(books) && books.length === 0)">
             <td colspan="4">현재 등록된 도서 목록이 없습니다!</td>
         </tr>
@@ -11,7 +11,7 @@
                             name: 'ReadBookPage',
                             params: { bookNumber:book.bookNumber.toString() },
                         }">
-                        <img src="@/assets/downloadImg/도둑맞은 집중력.jpg" style="max-width: 65%; height: auto;"/>
+                        <img src="@/assets/downloadImg/블랙쉼.jpg" style="max-width: 65%; height: auto;"/>
                         <div>
                             {{ book.bookName }}
                         </div>
@@ -21,7 +21,7 @@
         </v-row>
     </div>
 </template>
-  
+
 <script>
 export default {
     props: {
@@ -29,12 +29,8 @@ export default {
             type: Array,
         },
     },
-};
-</script>
-  
-<style>
-.categoryBtn{
-    margin: 20px;
 }
+</script>
+<style lang="">
+    
 </style>
-  

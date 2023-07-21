@@ -2,18 +2,18 @@
     <div>
         <h2>희망 도서 현황</h2>
         <v-btn @click="bookApplication">도서 신청</v-btn>
-        <hope-book-list-form :books="books"/>
+        <hope-list-book-form :books="books"/>
     </div>
 </template>
 
 <script>
-import HopeBookListForm from '../../components/service/HopeBookListForm.vue';
+import HopeListBookForm from '../../components/service/HopeListBookForm.vue';
 import { mapActions, mapState } from "vuex";
 const ServiceModule = "ServiceModule";
 
 export default {
     components: {
-        HopeBookListForm
+        HopeListBookForm
     },
     computed: {
         ...mapState(ServiceModule, ["books"]),
@@ -25,7 +25,7 @@ export default {
         ...mapActions(ServiceModule, ["requestHopeBookListToSpring"]),
         bookApplication() {
             this.$router.push({
-                name: "HopeBookRegisterPage"
+                name: "HopeRegisterBookPage"
             });
         }
     }

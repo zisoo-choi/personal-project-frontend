@@ -1,20 +1,20 @@
 <template lang="">
     <div>
         <h2>희망 도서 신청</h2>
-        <hope-book-register-form @submit="onSubmit"/>
+        <hope-register-book-form @submit="onSubmit"/>
     </div>
 </template>
 
 <script>
-import HopeBookRegisterForm from '@/components/service/HopeBookRegisterForm.vue';
+import HopeRegisterBookForm from '@/components/service/HopeRegisterBookForm.vue';
 import { mapActions } from "vuex";
 
 const ServiceModule = "ServiceModule"
 
 export default {
-    name: "HopeBookPage",
+    name: "HopeRegisterBookPage",
     components: {
-        HopeBookRegisterForm
+        HopeRegisterBookForm
     },
     methods: {
         ...mapActions(ServiceModule, ["requestHopeBookToSpring"]),

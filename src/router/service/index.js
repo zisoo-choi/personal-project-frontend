@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import HopeBookRegisterPage from "@/views/service/HopeBookRegisterPage.vue"
-import HopeBookListPage from "@/views/service/HopeBookListPage.vue"
+import HopeRegisterBookPage from "@/views/service/HopeRegisterBookPage.vue"
+import HopeListBookPage from "@/views/service/HopeListBookPage.vue"
 
 Vue.use(VueRouter)
 
@@ -19,13 +19,13 @@ const serviceRoutes = [
   // },
   {
     path: '/hope-register-book',
-    name: 'HopeBookRegisterPage',
-    component: HopeBookRegisterPage
+    name: 'HopeRegisterBookPage',
+    component: HopeRegisterBookPage
   },
   {
     path: '/hope-list-book',
-    name: 'HopeBookListPage',
-    component: HopeBookListPage
+    name: 'HopeListBookPage',
+    component: HopeListBookPage
   },
 ]
 

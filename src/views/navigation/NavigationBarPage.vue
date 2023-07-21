@@ -25,7 +25,7 @@
                     depressed
                   >
                     <span>category</span>
-                    <v-icon>mdi-book</v-icon>
+                    <v-icon>mdi-library</v-icon>
                   </v-btn>
                 </template>
                 <v-list>
@@ -56,6 +56,10 @@
             <v-btn v-if="isLogin" text @click="myPage">
                 <span>마이페이지</span>
                 <v-icon right>mdi-hand-back-left-outline</v-icon>
+            </v-btn>
+            <v-btn v-if="isLoginManager" text @click="bookManagement">
+                <span>도서관리</span>
+                <v-icon right>mdi-book</v-icon>
             </v-btn>
             <v-btn v-if="!isLogin" text @click="signUp">
                 <span>회원가입</span>
@@ -171,7 +175,8 @@ export default {
                 { title: '전체도서' },
             ],
             isLogin: false,
-            loginUserInfo: ''
+            loginUserInfo: '',
+            isLoginManager: true // 추후 관리자에게만 보여줘야 함
         };
     },
     methods: {
@@ -181,7 +186,7 @@ export default {
             .catch(() => {})
         },
         hopeBook() {
-          router.push("/hope-book")
+          router.push("/hope-list-book")
             .catch(() => {})
         },
         wholeBook() {
@@ -229,6 +234,10 @@ export default {
           //   }
           // }
         },
+        bookManagement() {
+          router.push("/management-book")
+          .catch(() => {})
+        }
       },
       mounted() {
         this.loginUserInfo = Cookies.get('accessToken');

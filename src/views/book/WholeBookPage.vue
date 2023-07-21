@@ -2,7 +2,7 @@
     <div class="full">
     </br>
         <h3>전체 도서 목록</h3>
-        <v-btn @click="bookRegister" @submit="onSubmit">도서 등록</v-btn>
+        <v-btn @click="bookRegister">도서 등록</v-btn>
         <div class="categoryBtn">
             <v-btn color="white" v-model="philosophy" @click="initializationClick">전체</v-btn>
             <v-btn color="white" v-model="philosophy" @click="handleCategoryClick('PHILOSOPHY')">철학</v-btn>
@@ -60,9 +60,6 @@ export default {
                 name: "RegisterBookPage"
             });
         },
-        onSubmit(payload) {
-
-        }
     }
 }
 </script>

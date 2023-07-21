@@ -51,7 +51,7 @@
             </table>
             <div>
                 <v-btn type="submit">등록 완료</v-btn>
-                <router-link :to="{name: 'HopeBookListPage'}">
+                <router-link :to="{name: 'HopeListBookPage'}">
                     돌아가기
                 </router-link>
             </div>

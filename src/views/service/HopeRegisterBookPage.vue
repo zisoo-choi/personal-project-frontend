@@ -22,7 +22,7 @@ export default {
             const book = await this.requestHopeBookToSpring(payload);
             
             await this.$router.push({
-                name: "home",
+                name: "HopeListBookPage",
                 params: { bookNumber: book.data.bookNumber.toString() },
             })
         }

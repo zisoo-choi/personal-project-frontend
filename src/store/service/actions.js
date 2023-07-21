@@ -43,5 +43,11 @@ export default {
         .then((res) => {
             commit(REQUEST_HOOP_BOOK_LIST_TO_SPRING, res.data)
         })
+    },
+    requestHopeBookToSpring({ commit }, hopeBookNumber) {
+        return axiosInst.get(`/library-service/hope-book-read/${hopeBookNumber}`)
+        .then((res) => {
+            commit(REQUEST_HOOP_BOOK_TO_SPRING, res.data);
+        })
     }
 }

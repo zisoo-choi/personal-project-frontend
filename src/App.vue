@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <navigation-bar-page />
+    <navigation-bar-page class="navigation"/>
     <v-main>
       <router-view/>
     </v-main>
@@ -23,3 +23,8 @@ export default {
   }),
 };
 </script>
+<style>
+.navigation{
+  z-index: 999;
+}
+</style>

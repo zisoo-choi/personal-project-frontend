@@ -57,7 +57,7 @@
                 <span>마이페이지</span>
                 <v-icon right>mdi-hand-back-left-outline</v-icon>
             </v-btn>
-            <v-btn v-if="isLoginManager" text @click="bookManagement">
+            <v-btn v-if="$managerUser" text @click="bookManagement">
                 <span>도서관리</span>
                 <v-icon right>mdi-book</v-icon>
             </v-btn>
@@ -89,26 +89,7 @@
           </v-list-item>
 
           <v-divider></v-divider>
-          <v-sheet class="pa-4 primary lighten-2">
-            <v-text-field
-              v-model="search"
-              label="서비스 검색"
-              dark
-              flat
-              solo-inverted
-              hide-details
-              clearable
-              clear-icon="mdi-close-circle-outline"
-              @input="searchGroup" />
-
-            <v-checkbox
-              v-model="caseSensitive"
-              dark
-              hide-details
-              label="Case sensitive search"
-            ></v-checkbox>
-          </v-sheet>
-
+         
           <v-list nav dense>
             <v-list-item
               v-for="(link, index) in links"
@@ -251,4 +232,7 @@ export default {
 </script>
 
 <style>
+.text-center{
+  z-index: 999;
+}
 </style>

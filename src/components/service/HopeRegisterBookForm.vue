@@ -9,12 +9,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>총 수량</th>
-                    <td>
-                        <input type="number" v-model="bookAmount" />
-                    </td>
-                </tr>
-                <tr>
                     <th>저자</th>
                     <td>
                         <input type="text" v-model="author"/>
@@ -42,12 +36,6 @@
                         </select>
                     </td>
                 </tr>
-                <tr>
-                    <th>줄거리</th>
-                    <td>
-                        <textarea cols="60" rows="20" v-model="content" />
-                    </td>
-                </tr>
             </table>
             <div>
                 <v-btn type="submit">등록 완료</v-btn>
@@ -67,9 +55,6 @@ export default {
             author: "",
             publishCompany: "",
             categorizationSymbol: "",
-            content: "",
-            updateDate: "",
-            bookAmount: "",
         };
     },
     methods: {
@@ -79,18 +64,12 @@ export default {
                 author,
                 publishCompany,
                 categorizationSymbol,
-                content,
-                updateDate,
-                bookAmount
             } = this;
             this.$emit("submit",
             { bookName,
                 author,
                 publishCompany,
                 categorizationSymbol,
-                content,
-                updateDate,
-                bookAmount
             });
         }
     }

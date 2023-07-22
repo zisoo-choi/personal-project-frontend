@@ -7,7 +7,7 @@ import {
 import axiosInst from "@/utility/axiosInst";
 
 export default {
-    requestHopeBookToSpring({}, payload) {
+    requestHopeBookRegisterToSpring({}, payload) {
         // axios의 기본 설정에 토큰을 포함시킵니다.
         const yourJwtToken = Cookies.get("refreshToken");
         axiosInst.defaults.headers.common['Authorization'] = `Bearer ${yourJwtToken}`;
@@ -17,9 +17,6 @@ export default {
             author,
             publishCompany,
             categorizationSymbol,
-            content,
-            updateDate,
-            bookAmount
         } = payload;
 
         return axiosInst.post("/library-service/hope-book", {
@@ -27,9 +24,6 @@ export default {
             author,
             publishCompany,
             categorizationSymbol,
-            content,
-            updateDate,
-            bookAmount
         }).then((res) => {
             alert("희망 도서 신청 성공!");
             return res;
@@ -44,7 +38,7 @@ export default {
             commit(REQUEST_HOOP_BOOK_LIST_TO_SPRING, res.data)
         })
     },
-    requestHopeBookToSpring({ commit }, hopeBookNumber) {
+    requestHopeBookReadToSpring({ commit }, hopeBookNumber) {
         return axiosInst.get(`/library-service/hope-book-read/${hopeBookNumber}`)
         .then((res) => {
             commit(REQUEST_HOOP_BOOK_TO_SPRING, res.data);

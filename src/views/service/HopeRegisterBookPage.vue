@@ -17,14 +17,16 @@ export default {
         HopeRegisterBookForm
     },
     methods: {
-        ...mapActions(ServiceModule, ["requestHopeBookToSpring"]),
+        ...mapActions(ServiceModule, ["requestHopeBookRegisterToSpring"]),
         async onSubmit(payload) {
-            const book = await this.requestHopeBookToSpring(payload);
+            const book = await this.requestHopeBookRegisterToSpring(payload);
+
+            console.log("book 있니? ",book);
             
             await this.$router.push({
-                name: "HopeListBookPage",
-                params: { bookNumber: book.data.bookNumber.toString() },
-            })
+                name: "HopeReadBookPage",
+                params: { hopeBookNumber: book.data.hopeBookNumber.toString() },
+            });
         }
     }    
 }

@@ -27,10 +27,10 @@ export default {
         ...mapState(ServiceModule, ["book"])
     },
     methods: {
-        ...mapActions(ServiceModule, ["requestHopeBookToSpring"]),
+        ...mapActions(ServiceModule, ["requestHopeBookReadToSpring"]),
     },
     created() {
-        this.requestHopeBookToSpring(this.hopeBookNumber);
+        this.requestHopeBookReadToSpring(this.hopeBookNumber);
     }
 }
 </script>

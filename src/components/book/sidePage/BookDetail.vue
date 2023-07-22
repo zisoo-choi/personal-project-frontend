@@ -35,7 +35,9 @@
             <tr>
                 <td>줄거리</td>
                 <td>
-                    <textarea cols="60" rows="20" :value="book.content" readonly/>
+                    <div class="scrollable-content">
+                        <textarea cols="60" rows="20" :value="book.content" readonly/>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -52,9 +54,9 @@
             </tr>
         </table>
     </div>
-  </template>
+</template>
   
-  <script>
+<script>
   export default {
     // props: ['book', 'bookNumber'], // 상위 컴포넌트로부터 bookNumber를 전달받음
     props: {
@@ -68,13 +70,33 @@
   
 <style>
 .side-page {
-    position: fixed;
-    top: 56px; /* 네비게이션의 높이(56px)만큼 아래로 위치 조정 */
-    right: 0;
-    bottom: 0;
-    width: 45%; /* 원하는 사이드 페이지의 너비로 조정 */
-    background-color: gray;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    padding: 20px;
+  position: fixed;
+  top: 56px; /* 네비게이션의 높이(56px)만큼 아래로 위치 조정 */
+  right: 0;
+  bottom: 0;
+  width: 45%; /* 원하는 사이드 페이지의 너비로 조정 */
+  background-color: gray;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+}
+
+/* table과 textarea 요소의 너비를 고정값으로 설정 */
+table {
+  min-width: 100px; /* 테이블의 최소 너비를 설정, 원하는 너비로 조정 */
+  width: 80%; /* 테이블의 최대 너비를 설정 */
+  table-layout: fixed; /* 테이블의 너비를 고정 값으로 설정 */
+}
+
+table td input[type="text"],
+table td textarea {
+  width: 100%; /* 원하는 input/textarea 너비로 설정 */
+  box-sizing: border-box; /* padding과 border를 포함한 전체 너비로 설정 */
+  word-wrap: break-word; /* 긴 단어를 여러 줄로 자동 줄바꿈 */
+}
+
+/* 줄거리를 감싸는 div 요소에 스타일 추가 */
+.scrollable-content {
+  max-height: 500px; /* 최대 높이를 원하는 값으로 설정 */
+  overflow-y: auto; /* 세로 스크롤 생성 */
 }
 </style>

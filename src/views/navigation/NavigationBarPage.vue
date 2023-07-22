@@ -8,7 +8,6 @@
                 <b>cloud library</b>
               </v-toolbar-title>
             </v-btn>
-
             <!-- 검색 창 -->
             <v-spacer></v-spacer>
               <navigation-search-bar-page />
@@ -53,23 +52,23 @@
               </v-menu>
             </div>
 
-            <v-btn v-if="isLogin" text @click="myPage">
+            <v-btn v-if="isLogin()" text @click="myPage">
                 <span>마이페이지</span>
                 <v-icon right>mdi-hand-back-left-outline</v-icon>
             </v-btn>
-            <v-btn v-if="$managerUser" text @click="bookManagement">
+            <v-btn v-if="isManager()" text @click="bookManagement">
                 <span>도서관리</span>
                 <v-icon right>mdi-book</v-icon>
             </v-btn>
-            <v-btn v-if="!isLogin" text @click="signUp">
+            <v-btn v-if="!isLogin()" text @click="signUp">
                 <span>회원가입</span>
                 <v-icon right>mdi-account-plus-outline</v-icon>
             </v-btn>
-            <v-btn v-if="!isLogin" text @click="signIn">
+            <v-btn v-if="!isLogin()" text @click="signIn">
                 <span>로그인</span>
                 <v-icon right>mdi-login</v-icon>
             </v-btn>
-            <v-btn v-if="isLogin" text @click="signOut">
+            <v-btn v-if="isLogin()" text @click="signOut">
                 <span>로그아웃</span>
                 <v-icon right>mdi-exit-to-app</v-icon>
             </v-btn>
@@ -134,9 +133,10 @@
 <script>
 import router from "@/router";
 import Cookies from "js-cookie";
-import MemberModule from "@/store/member/MemberModule";
 import NavigationSearchBarPage from "@/views/navigation/NavigationSearchBarPage.vue";
-import { mapActions } from "vuex";
+import { mapActions, mapState, mapGetters } from "vuex";
+
+const MemberModule = 'MemberModule';
 
 export default {
   components: { NavigationSearchBarPage },
@@ -155,13 +155,22 @@ export default {
                 { title: '희망도서' },
                 { title: '전체도서' },
             ],
-            isLogin: false,
-            loginUserInfo: '',
-            isLoginManager: true // 추후 관리자에게만 보여줘야 함
         };
     },
+    computed: {
+      ...mapState(MemberModule, ["memberInfo"]),
+    },
     methods: {
-      ...mapActions(MemberModule, 'requestMemberLoginOutToSpring'),
+      isLogin(){
+        return this.memberInfo !== null
+      },
+      isManager(){
+        if(!this.isLogin())
+          return false
+        
+        return this.memberInfo.role === "ROLE_MANAGER" 
+      },
+      ...mapActions(MemberModule, ['requestLoginTest']),
         newBook() {
           router.push("/new-book")
             .catch(() => {})
@@ -179,6 +188,7 @@ export default {
             .catch(() => {})
         },
         signIn() {
+          console.log(this.memberInfo)
           router.push('/sign-in')
           .catch(() => {});
         },
@@ -187,7 +197,8 @@ export default {
           if (accessToken != null) {
             Cookies.remove('accessToken');
             Cookies.remove('refreshToken');
-            location.reload();
+            Cookies.remove('role');
+            this.requestLoginTest();
             alert('로그아웃 되었습니다.');
           }
         },
@@ -218,14 +229,6 @@ export default {
         bookManagement() {
           router.push("/management-book")
           .catch(() => {})
-        }
-      },
-      mounted() {
-        this.loginUserInfo = Cookies.get('accessToken');
-
-        if (this.loginUserInfo != null) {
-            this.isLogin = true;
-            router.push('/').catch(() => {});
         }
       },
 }

@@ -1,3 +1,9 @@
+import {
+    REQUEST_USER_TOKEN_TO_SPRING,
+    REQUEST_USER_INFO_TO_SPRING,
+    REQUEST_IS_LOGIN_TO_SPRING
+  } from "./mutation-types";
+
 import axiosInst from "@/utility/axiosInst";
 import Cookies from "js-cookie";
 
@@ -82,18 +88,27 @@ export default {
             })
     },
     // 로그인
-    requestLoginMemberToSpring ({}, payload) {
+    requestLoginMemberToSpring ({ commit }, payload) {
         const { memberId, memberPw } = payload
 
-        return axiosInst.post('/application/json', {
+        return axiosInst.post('/library-member/sign-in', {
             memberId, memberPw
         })
         .then((res) => {
+            const token = {};
+            token.refreshToken = res.data.refreshToken
+            token.accessToken = res.data.accessToken
+            commit(REQUEST_USER_TOKEN_TO_SPRING, token);
+
+            const member = {};
+            member.role = res.data.role
+            commit(REQUEST_USER_INFO_TO_SPRING, member);
+
             if (res.data.accessToken) {
-              const { accessToken, refreshToken } = res.data;
+              const { accessToken, refreshToken, role } = res.data;
               Cookies.set('accessToken', accessToken);
               Cookies.set('refreshToken', refreshToken);
-              location.reload()
+              Cookies.set('role', role);
               alert('회원님 반갑습니다!');
               return accessToken;
             } else {
@@ -105,5 +120,8 @@ export default {
             console.error('로그인 실패:', error);
             throw error;
           });
+    },
+    requestLoginTest({commit}) {
+        commit(REQUEST_USER_INFO_TO_SPRING, null);
     },
 }

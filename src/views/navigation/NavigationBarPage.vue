@@ -134,7 +134,7 @@
 import router from "@/router";
 import Cookies from "js-cookie";
 import NavigationSearchBarPage from "@/views/navigation/NavigationSearchBarPage.vue";
-import { mapActions, mapState, mapGetters } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 const MemberModule = 'MemberModule';
 

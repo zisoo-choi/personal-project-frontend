@@ -59,7 +59,6 @@
                 <tr>
                     <td>수정일자</td>
                     <td>
-                        <!-- <input type="text" :value="book.updateDate"/> -->
                         <input type="text" v-model="updateDate" />
                     </td>
                 </tr>

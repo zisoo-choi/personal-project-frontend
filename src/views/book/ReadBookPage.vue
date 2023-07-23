@@ -4,11 +4,11 @@
         <read-book-form v-if="book" :book="book" />
         <p v-else>로딩중 .......</p>
 
-        <router-link :to="{ name: 'ModifyBookPage', params: { bookNumber } }">
+        <router-link v-if="isManager()" :to="{ name: 'ModifyBookPage', params: { bookNumber } }">
             도서 수정
         </router-link>
-        <button @click="onDelete">도서 삭제</button>
-        <router-link :to="{ name: 'WholeBookPage' }"> 돌아가기 </router-link>
+        <button v-if="isManager()" @click="onDelete">도서 삭제</button>
+        <router-link :to="{ name: 'NewBookPage' }"> 돌아가기 </router-link>
     </div>
 </template>
 
@@ -17,6 +17,7 @@ import ReadBookForm from "@/components/book/ReadBookForm.vue"
 
 import { mapActions, mapState } from "vuex";
 const BookModule = "BookModule";
+const MemberModule = 'MemberModule';
 
 export default {
     name: "ReadBookPage",
@@ -30,7 +31,8 @@ export default {
         }
     },
     computed: {
-        ...mapState(BookModule, ["book"])
+        ...mapState(BookModule, ["book"]),
+        ...mapState(MemberModule, ["memberInfo"]),
     },
     methods: {
         ...mapActions(BookModule, ["requestBookToSpring", "requestDeleteBoardToSpring"]),
@@ -39,6 +41,12 @@ export default {
             await this.$router.push({
                 name: "WholeBookPage"
             });
+        },
+        isManager() {
+            if (this.memberInfo && this.memberInfo.role === "ROLE_MANAGER") {
+            return true;
+            }
+            return false;
         },
     },
     created() {

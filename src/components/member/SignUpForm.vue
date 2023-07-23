@@ -38,7 +38,7 @@
                                     <v-text-field
                                         v-model="email"
                                         :rules="email_rule"
-                                        label="google 이메일"
+                                        label="이메일"
                                         :disabled="false"
                                         required
                                     ></v-text-field>
@@ -52,7 +52,7 @@
                                             class="mt-1 ml-2" color="teal lighten-1"
                                             @click="checkAuthenticationEmail"
                                             :disabled="false">
-                                            google</br>이메일 인증
+                                            이메일<br/>코드 전송
                                     </v-btn>
                                 </div>
                                 <div class="d-flex" v-if="isPressedButton" >

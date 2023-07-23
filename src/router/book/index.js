@@ -7,6 +7,9 @@ import ReadBookPage from '@/views/book/ReadBookPage.vue'
 import ModifyBookPage from '@/views/book/ModifyBookPage.vue'
 import RegisterBookPage from "@/views/book/RegisterBookPage.vue"
 import ManagementBookPage  from "@/views/book/manager/ManagementBookPage.vue"
+import ManagementRegisterBookPage from "@/views/book/manager/ManagementRegisterBookPage.vue"
+import ManagementReadBookPage from "@/views/book/manager/ManagementReadBookPage.vue"
+import ManagementModifyBookPage from "@/views/book/manager/ManagementModifyBookPage.vue"
 
 Vue.use(VueRouter)
 
@@ -50,6 +53,31 @@ const bookRoutes = [
     path: '/management-book',
     name: 'ManagementBookPage',
     component: ManagementBookPage
+  },
+  {
+    path: '/management-register-book',
+    name: 'ManagementRegisterBookPage',
+    component: ManagementRegisterBookPage
+  },
+  {
+    path: '/management-read-book/:bookNumber',
+    name: 'ManagementReadBookPage',
+    components: {
+      default: ManagementReadBookPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/management-modify-book/:bookNumber',
+    name: 'ManagementModifyBookPage',
+    components: {
+      default: ManagementModifyBookPage
+    },
+    props: {
+      default: true
+    }
   },
 ]
 

@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-        <h2>관리자 페이지</h2>
+        <h2 class="managementPage">관리자 페이지</h2>
         <management-book-form />
     </div>
 </template>
@@ -14,6 +14,9 @@ export default {
 }
 </script>
 
-<style lang="">
-    
+<style lang="css">
+    .managementPage{
+        background-color: rgb(78, 78, 78);
+        color: white;
+    }
 </style>

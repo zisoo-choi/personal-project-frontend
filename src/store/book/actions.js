@@ -25,14 +25,18 @@ export default {
             commit(REQUEST_BOOK_TO_SPRING, res.data);
         });
     },
-    requestDeleteBoardToSpring({}, bookNumber) {
+    requestDeleteBoardToSpring({commit}, bookNumber) {
         // axios의 기본 설정에 토큰을 포함시킵니다.
         const yourJwtToken = Cookies.get("refreshToken");
         axiosInst.defaults.headers.common['Authorization'] = `Bearer ${yourJwtToken}`;
         
+        // console.log("이건 전달 돼?"+bookNumber);
+        // console.log("왜 전달 안돼?"+deleteCount);
+
         return axiosInst.delete(`/book-list/delete-book/${bookNumber}`)
         .then((res) => {
             alert("삭제 성공!");
+            return res.data;
         })
         .catch(() => {
             alert("문제 발생!");

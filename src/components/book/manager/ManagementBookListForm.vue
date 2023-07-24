@@ -55,13 +55,13 @@
           @close-popup="closeDeletePopup"
         /> -->
         <div class="popup-container" v-if="onPopup">
-              <div class="popup">
-                <h3>도서 삭제</h3>
-                <p>해당 [{{selectedBook.bookName}}] 도서를 삭제하시겠습니까?</p>
-                <button @click="onDelete(selectedBook.bookNumber)">Yes</button>
-                <button @click="onCancel">No</button>
-              </div>
+            <div class="popup">
+              <h3>도서 삭제</h3>
+              <p>해당 [{{selectedBook.bookName}}] 도서를 삭제하시겠습니까?</p>
+              <button @click="onDelete(selectedBook.bookNumber)">Yes</button>
+              <button @click="onCancel">No</button>
             </div>
+          </div>
       </table>
     </div>
   </template>
@@ -98,8 +98,8 @@ export default {
       this.onPopup = true;
     },
     onCancel() {
-        this.onPopup = false;
-      },
+      this.onPopup = false;
+    },
     onModify(bookNumber) {
       this.$router.push({
           name: "ManagementModifyBookPage",
@@ -114,6 +114,10 @@ export default {
     async onDelete(bookNumber) {
       await this.requestDeleteBoardToSpring(bookNumber);
       await this.requestBookListToSpring();
+
+      // 계정 삭제가 완료되면 팝업을 닫습니다.
+      this.onPopup = false;
+
       // await this.$router.push({
       //     name: "ManagementBookPage"
       // });

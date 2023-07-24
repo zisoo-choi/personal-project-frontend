@@ -67,7 +67,7 @@ export default {
   position: fixed;
   top: 0px;
   left: 0;
-  right: 45%;
+  right: 55%;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5); /* 불투명한 배경 색상 설정 */
   z-index: 900; /* 다른 요소들보다 앞에 표시하기 위한 z-index 설정 */

@@ -8,7 +8,7 @@
         </div>
         <div class="mainView">
             <management-book-list-form v-if="pushBook" :books="books"/>
-            <management-service-form v-if="pushService"/>
+            <management-service-form v-if="pushService" :rentalBooks="rentalBooks"/>
             <management-member-list-form v-if="pushMember" :members="members"/>
         </div>
     </div>
@@ -22,6 +22,7 @@ import ManagementMemberListForm from '@/components/book/manager/ManagementMember
 import { mapActions, mapState } from "vuex";
 const BookModule = 'BookModule';
 const MemberModule = 'MemberModule';
+const ServiceModule = 'ServiceModule';
 
 export default {
     data() {
@@ -54,6 +55,7 @@ export default {
         },
         ...mapActions(BookModule, ["requestBookListToSpring"]),
         ...mapActions(MemberModule, ["requestMemberListToSpring"]),
+        ...mapActions(ServiceModule, ["requestRentalListToSpring"]),
         bookRegister() {
             this.$router.push({
                 name: "ManagementRegisterBookPage"
@@ -63,10 +65,12 @@ export default {
     computed: {
         ...mapState(BookModule, ["books"]),
         ...mapState(MemberModule, ["members"]),
+        ...mapState(ServiceModule, ["rentalBooks"])
     },
     mounted() {
         this.requestBookListToSpring();
         this.requestMemberListToSpring();
+        this.requestRentalListToSpring();
     },
 }
 </script>

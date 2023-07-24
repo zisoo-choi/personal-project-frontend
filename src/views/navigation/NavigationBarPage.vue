@@ -1,9 +1,9 @@
 <template lang="">
     <nav>
-        <v-app-bar color="white" app elevation="0">
+        <v-app-bar color="#d7f2ff" app elevation="0">
             <v-app-bar-nav-icon color="black" @click="navigation_drawer = !navigation_drawer"/>
             <!-- 로고가 들어갈 타이틀 문구 있는 곳 -->
-            <v-btn depressed color="white" @click="goToHome">
+            <v-btn depressed color="#d7f2ff" @click="goToHome">
               <v-toolbar-title class="text-uppercase text--darken-4">
                 <b>cloud library</b>
               </v-toolbar-title>
@@ -18,7 +18,7 @@
               <v-menu offset-y open-on-hover elevation="0">
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
-                    color="white"
+                    color="#d7f2ff"
                     v-bind="attrs"
                     v-on="on"
                     depressed

@@ -25,7 +25,6 @@ export default {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;
     font-weight: bold;
-    background: linear-gradient(to bottom, white, rgb(221, 221, 221) 100%);
     margin-top: 20px;
 }
 </style>

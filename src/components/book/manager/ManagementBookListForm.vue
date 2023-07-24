@@ -36,15 +36,7 @@
           </td>
           <td>
             <!-- <button @click="onDelete(book.bookNumber)">삭제</button> -->
-            <button @click="onDeleteClick">삭제</button>
-            <div class="popup-container" v-if="onPopup">
-              <div class="popup">
-                <h3>도서 삭제</h3>
-                <p>해당 [{{book.bookName}}] 도서를 삭제하시겠습니까?</p>
-                <button @click="onDelete(book.bookNumber)">Yes</button>
-                <button @click="onCancel">No</button>
-              </div>
-            </div>
+            <button @click="onDeleteClick(book)">삭제</button>
           </td>
           <td>
             <router-link :to="{
@@ -62,6 +54,14 @@
           @onDeleteBooks="onDeleteBooks"
           @close-popup="closeDeletePopup"
         /> -->
+        <div class="popup-container" v-if="onPopup">
+              <div class="popup">
+                <h3>도서 삭제</h3>
+                <p>해당 [{{selectedBook.bookName}}] 도서를 삭제하시겠습니까?</p>
+                <button @click="onDelete(selectedBook.bookNumber)">Yes</button>
+                <button @click="onCancel">No</button>
+              </div>
+            </div>
       </table>
     </div>
   </template>
@@ -77,7 +77,8 @@ export default {
       // 삭제 팝업을 표시할지 여부를 관리하는 데이터
       showDelete: false,
       deleteCount: 0,
-      onPopup: false
+      onPopup: false,
+      selectedBook: null, // 선택한 회원 정보를 저장할 데이터
     };
   },
   props: {
@@ -92,7 +93,8 @@ export default {
         ...mapState(BookModule, ["book"]),
     },
   methods: {
-    onDeleteClick() {
+    onDeleteClick(book) {
+      this.selectedBook = book; // 선택한 회원 정보를 업데이트합니다.
       this.onPopup = true;
     },
     onCancel() {
@@ -136,15 +138,15 @@ export default {
 <style lang="css">
 /* 팝업 스타일을 원하는 대로 꾸밀 수 있습니다. */
 .popup-container {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-color: rgba(0, 0, 0, 0.5);
-display: flex;
-justify-content: center;
-align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .popup {

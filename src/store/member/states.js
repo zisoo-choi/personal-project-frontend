@@ -1,5 +1,6 @@
 export default {
     token:{},
-    memberInfo:null,
-    // isLogin: false
+    memberInfo: null,
+    members: [],
+    member: {}
 };

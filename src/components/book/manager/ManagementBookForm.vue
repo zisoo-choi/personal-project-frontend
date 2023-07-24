@@ -9,7 +9,7 @@
         <div class="mainView">
             <management-book-list-form v-if="pushBook" :books="books"/>
             <management-service-form v-if="pushService"/>
-            <management-member-form v-if="pushMember"/>
+            <management-member-list-form v-if="pushMember" :members="members"/>
         </div>
     </div>
 </template>
@@ -17,10 +17,11 @@
 <script>
 import ManagementBookListForm from '@/components/book/manager/ManagementBookListForm.vue';
 import ManagementServiceForm from '@/components/book/manager/ManagementServiceForm.vue'
-import ManagementMemberForm from '@/components/book/manager/ManagementMemberForm.vue'
+import ManagementMemberListForm from '@/components/book/manager/ManagementMemberListForm.vue'
 
 import { mapActions, mapState } from "vuex";
 const BookModule = 'BookModule';
+const MemberModule = 'MemberModule';
 
 export default {
     data() {
@@ -33,7 +34,7 @@ export default {
     components: {
         ManagementBookListForm,
         ManagementServiceForm,
-        ManagementMemberForm
+        ManagementMemberListForm
     },
     methods: {
         BookManagement() {
@@ -52,6 +53,7 @@ export default {
             this.pushBook = false;
         },
         ...mapActions(BookModule, ["requestBookListToSpring"]),
+        ...mapActions(MemberModule, ["requestMemberListToSpring"]),
         bookRegister() {
             this.$router.push({
                 name: "ManagementRegisterBookPage"
@@ -60,9 +62,11 @@ export default {
     },
     computed: {
         ...mapState(BookModule, ["books"]),
+        ...mapState(MemberModule, ["members"]),
     },
     mounted() {
         this.requestBookListToSpring();
+        this.requestMemberListToSpring();
     },
 }
 </script>

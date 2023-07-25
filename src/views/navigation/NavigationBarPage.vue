@@ -199,7 +199,11 @@ export default {
             Cookies.remove('refreshToken');
             Cookies.remove('role');
             this.requestLoginTest();
-            alert('로그아웃 되었습니다.');
+
+            if(this.memberInfo == null) {
+              this.$router.push("/")
+              alert('로그아웃 되었습니다.');
+            }
           }
         },
         goToHome() {

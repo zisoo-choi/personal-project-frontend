@@ -115,6 +115,7 @@ export default {
               return accessToken;
             } else {
               alert('회원이 아닙니다.');
+              commit(REQUEST_USER_INFO_TO_SPRING, null);
               return null;
             }
           })

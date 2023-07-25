@@ -9,7 +9,6 @@
         <v-row>
             <v-col cols="6">
                 <div class="todayRecommend">
-
                     <h1>읽으면 지식이 쌓인다</h1>
                     <h1>오늘의 추천 도서</h1>
                 </br>
@@ -58,6 +57,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    filter: drop-shadow(10px 10px 6px #c3c3c3); /*그림자*/
 }
 .todayRecommend {
     display: flex;

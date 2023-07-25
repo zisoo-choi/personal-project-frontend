@@ -56,6 +56,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    filter: drop-shadow(10px 3px 6px #2121213c); /*그림자*/
 }
 .todayTalk {
     display: flex;

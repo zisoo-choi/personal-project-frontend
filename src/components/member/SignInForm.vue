@@ -1,6 +1,6 @@
 <template lang="">
-    <div class="grey lighten-5" style="font-family: 'Noto Sans KR', sans-serif">
-        <v-container class="white">
+    <div style="font-family: 'Noto Sans KR', sans-serif">
+        <v-container>
             <v-row justify="center">
                 <v-col cols="auto" style="padding-bottom: 90px">
                     <v-card width="550" style="margin-top: 90px">
@@ -27,7 +27,7 @@
                                 </div>
 
                                 <v-btn type="submit" block x-large rounded
-                                        color="green lighten-1" class="mt-6"
+                                color="rgb(96, 143, 255)" style="color:white;" class="mt-6"
                                          ><b>로그인</b></v-btn>
                                 </v-form>
                             </v-form>

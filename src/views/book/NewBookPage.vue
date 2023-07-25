@@ -1,7 +1,10 @@
 <template lang="">
     <div class="full">
-        <h2>신간 도서</h2>
-        <new-book-form :books="books"/>
+    </br>
+        <div class="newBookInBox">
+            <h2>신간 도서</h2>
+            <new-book-form :books="books"/>
+        </div>
     </div>
 </template>
 
@@ -27,5 +30,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="css">
+.newBookInBox{
+    background-color: white;
+    margin: 0px 40px 5px 40px;
+    border-radius: 20px;
+    padding: 10px;
+}
 </style>

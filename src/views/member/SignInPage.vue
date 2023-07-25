@@ -1,5 +1,5 @@
 <template lang="">
-    <div>
+    <div class="full">
         <sign-in-form @submit="onSubmit"></sign-in-form>
     </div>
 </template>
@@ -28,6 +28,5 @@ export default {
 }
 </script>
 
-<style lang="">
-    
+<style lang="css">
 </style>

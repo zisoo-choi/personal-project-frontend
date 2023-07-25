@@ -1,5 +1,5 @@
 <template lang="">
-    <div>
+    <div class="full">
         <sign-up-form @submit="onSubmit"></sign-up-form>
     </div>
 </template>

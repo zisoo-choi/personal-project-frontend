@@ -11,7 +11,7 @@
                             name: 'HopeReadBookPage',
                             params: { hopeBookNumber:book.hopeBookNumber.toString() },
                         }">
-                        <img src="@/assets/downloadImg/역행자.jpg" style="max-width: 65%; height: auto;"/>
+                        <img src="@/assets/downloadImg/도둑맞은 집중력.jpg" style="max-width: 65%; height: auto;"/>
                         <div>
                             {{ book.bookName }}
                         </div>

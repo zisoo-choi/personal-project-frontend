@@ -1,15 +1,15 @@
 <template lang="">
     <div class="managementView">
+        <div class="mainView">
+            <management-book-list-form v-if="pushBook" :books="books"/>
+            <management-service-form v-if="pushService" :rentalBooks="rentalBooks"/>
+            <management-member-list-form v-if="pushMember" :members="members"/>
+        </div>
         <div class="rightView">
             <v-btn @click="BookManagement">Book</v-btn>
             <v-btn @click="bookRegister">Register Book</v-btn>
             <v-btn @click="RentalManagement">Rental</v-btn>
             <v-btn @click="MemberManagement">Member</v-btn>
-        </div>
-        <div class="mainView">
-            <management-book-list-form v-if="pushBook" :books="books"/>
-            <management-service-form v-if="pushService" :rentalBooks="rentalBooks"/>
-            <management-member-list-form v-if="pushMember" :members="members"/>
         </div>
     </div>
 </template>
@@ -78,19 +78,24 @@ export default {
 <style lang="css">
 .managementView {
   display: flex; /* Flexbox 레이아웃 활성화 */
-  flex-direction: row-reverse; /* 자식 요소의 배치 방향을 오른쪽에서 왼쪽으로 변경 */
+  
 }
 
 .mainView {
   border: 1px solid black;
   width: 80%;
   height: 1250px;
-  background-color: rgb(255, 227, 214);
 }
 
 .rightView {
+  display: flex; /* 자식 요소를 세로로 배치하기 위해 Flexbox를 사용 */
+  flex-direction: column; /* 자식 요소의 배치 방향을 세로로 설정 */
   border: 1px solid black;
   width: 20%;
   height: 1250px;
+}
+
+.rightView v-btn {
+    margin-bottom: 10px;
 }
 </style>

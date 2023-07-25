@@ -1,13 +1,24 @@
 <template lang="">
     <div>
-        마이 페이지 입니다.
+        <my-page-form />
     </div>
 </template>
+
 <script>
+import MyPageForm from '@/components/member/myPage/MyPageForm.vue';
+
 export default {
-    
+    data() {
+        return {
+
+        }
+    },
+    components: {
+        MyPageForm
+    }
 }
 </script>
-<style lang="">
+
+<style lang="css">
     
 </style>

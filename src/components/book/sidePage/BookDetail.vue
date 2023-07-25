@@ -15,6 +15,12 @@
                 </td>
             </tr>
             <tr>
+                <td>대여 가능 수량</td>
+                <td>
+                    <input type="text" :value="book.rentalAmount" readonly/>
+                </td>
+            </tr>
+            <tr>
                 <td>저자</td>
                 <td>
                     <input type="text" :value="book.author" readonly/>
@@ -43,7 +49,7 @@
             <tr>
                 <td>관리자</td>
                 <td>
-                    <input type="text" :value="book.managerNumber" readonly/>
+                    <input type="text" :value="book.manager.memberId" readonly/>
                 </td>
             </tr>
             <tr>
@@ -53,6 +59,7 @@
                 </td>
             </tr>
             <div v-if="isLogin()" class="button-container">
+                <v-btn color="pink" @click="onReturnedClick(book)">반납하기</v-btn>
                 <v-btn color="primary" @click="onRentClick(book)">대여하기</v-btn>
                 <v-btn color="primary" @click="onPurchaseClick">구매하기</v-btn>
                 <v-btn color="primary" @click="onAddToCartClick">장바구니</v-btn>
@@ -78,7 +85,7 @@ const ServiceModule = "ServiceModule"
     data() {
         return {
             selectedBook: '',
-            onPopup: false
+            onPopup: false,
         }
     },
     // props: ['book', 'bookNumber'], // 상위 컴포넌트로부터 bookNumber를 전달받음
@@ -86,13 +93,14 @@ const ServiceModule = "ServiceModule"
         book: {
             type: Object,
             required: true,
+            selectedBook: '',
         }
     },
     computed: {
         ...mapState(MemberModule, ["memberInfo"]),
     },
     methods: {
-        ...mapActions(ServiceModule, ['requestRentalToSpring']),
+        ...mapActions(ServiceModule, ['requestRentalToSpring', 'requestReturnedToSpring']),
         isLogin() {
             if (this.memberInfo !== null) {
                 return true;
@@ -104,10 +112,23 @@ const ServiceModule = "ServiceModule"
             this.selectedBook = book; // 선택한 회원 정보를 업데이트합니다.
             this.onPopup = true;
         },
-        onRent(bookNumber) {
-            this.requestRentalToSpring(bookNumber);
+        async onRent(bookNumber) {
+            const isRent =  await this.requestRentalToSpring(bookNumber);
+
+            console.log("isRent: ", isRent);
+    
+            if(isRent === false) {
+                alert("대여 불가")
+                this.onPopup = false;
+            } else {
+                alert("도서 대여가 성공적으로 이루어졌습니다.")
             this.onPopup = false;
+            }
         },
+        // onReturnedClick(book) {
+        //     this.selectedBook = book;
+        //     this.requestReturnedToSpring(book.bookNumber);
+        // },
         onCancel() {
             this.onPopup = false;
         },

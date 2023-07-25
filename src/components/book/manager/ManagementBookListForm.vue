@@ -17,7 +17,7 @@
         </tr>
         <tr v-else v-for="book in books" :key="book.bookNumber">
           <td align="center">
-            {{ book.managerNumber }}
+            {{ book.manager.memberNumber }}
           </td>
           <td align="center">
             {{ book.bookNumber }}
@@ -29,7 +29,7 @@
             {{ book.author }}
           </td>
           <td align="center">
-            {{ book.bookAmount }}
+            {{ book.rentalAmount }}
           </td>
           <td align="center">
             {{ book.registrationDate }}

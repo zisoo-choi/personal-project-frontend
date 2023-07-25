@@ -201,7 +201,8 @@ export default {
             this.requestLoginTest();
 
             if(this.memberInfo == null) {
-              this.$router.push("/")
+              router.push("/")
+            .catch(() => {})
               alert('로그아웃 되었습니다.');
             }
           }

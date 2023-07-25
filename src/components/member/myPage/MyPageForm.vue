@@ -1,12 +1,12 @@
 <template lang="">
     <div class="myPageBox">
         <div class="rightBox">
-            <my-page-rental-form v-if="pushRentalInfo"/>
+            <my-page-rental-form v-if="pushRentalInfo" :rentalBooks="rentalBooks"/>
         </div>
         <div class="leftBox">
             <v-btn @click="onPersonalInfo">개인 정보</v-btn>
             <v-btn>장바구니</v-btn>
-            <v-btn @click="myRent" :rentalBook="rentalBook">나의 대출 현황</v-btn>
+            <v-btn @click="myRent">나의 대출 현황</v-btn>
             <v-btn>나의 구매 현황</v-btn>
             <v-btn>희망 도서 신청 현황</v-btn>
         </div>
@@ -18,6 +18,7 @@ import MyPageRentalForm from './MyPageRentalForm.vue';
 
 import { mapActions, mapState } from "vuex";
 const ServiceModule = 'ServiceModule';
+const MemberModule = 'MemberModule'
 
 export default {
     data() {
@@ -38,7 +39,8 @@ export default {
         }
     },
     computed: {
-        ...mapState(ServiceModule, ["rentalBook"]),
+        ...mapState(ServiceModule, ["rentalBooks"]),
+        ...mapState(MemberModule, ["memberInfo"])
     },
     mounted() {
         this.requestPersonalInfoToSpring();

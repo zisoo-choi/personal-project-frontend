@@ -7,12 +7,6 @@
                     <input type="text" :value="book.hopeBookNumber" readonly/>
                 </td>
             </tr>
-            <!-- <tr>
-                <td>총 수량</td>
-                <td>
-                    <input type="text" :value="book.bookAmount" readonly/>
-                </td>
-            </tr> -->
             <tr>
                 <td>저자</td>
                 <td>
@@ -37,16 +31,16 @@
                     <input type="text" :value="book.categorizationSymbol" readonly/>
                 </td>
             </tr> -->
-            <!-- <tr>
-                <td>줄거리</td>
-                <td>
-                    <textarea cols="60" rows="20" :value="book.content" readonly/>
-                </td>
-            </tr> -->
             <tr>
-                <td>등록일자</td>
+                <td>신청일자</td>
                 <td>
                     <input type="text" :value="book.applicationDate" readonly/>
+                </td>
+            </tr>
+            <tr>
+                <td>신청인</td>
+                <td>
+                    <input type="text" :value="book.member.memberId" readonly/>
                 </td>
             </tr>
         </table>

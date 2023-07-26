@@ -82,8 +82,8 @@
           v-if="navigation_drawer">
           <v-list-item>
               <v-list-item-content>
-              <v-list-item-title class="text-h6">CLOUD</v-list-item-title>
-              <v-list-item-subtitle>LIBRARY</v-list-item-subtitle>
+              <v-list-item-title class="text-h6">{{memberInfo.memberId}}</v-list-item-title>
+              <v-list-item-subtitle>님 오늘도 맑은 하루 입니다 !</v-list-item-subtitle>
               </v-list-item-content>
           </v-list-item>
 

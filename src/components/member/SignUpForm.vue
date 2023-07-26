@@ -59,8 +59,7 @@
                                     <v-text-field
                                         v-model="emailCode"
                                         label="전송된 이메일 코드"
-                                        
-                                        type="password"
+                                        type="text"
                                         :disabled="false"
                                     ></v-text-field>
                                     <v-btn text large outlined style="font-size: 13px"
@@ -235,8 +234,8 @@ export default {
             }
         },
         isFormValid () {
-            // return this.memberId && this.memberPw && this.email && this.codePass;
-            return true // 테스트 용으로 일단 다 true
+            return this.memberId && this.memberPw && this.email && this.codePass;
+            // return true // 테스트 용으로 일단 다 true
         },
     },
 }

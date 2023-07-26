@@ -2,6 +2,7 @@
     <div class="myPageBox">
         <div class="rightBox">
             <my-page-rental-form v-if="pushRentalInfo" :rentalBooks="rentalBooks"/>
+            <my-page-reservation-form v-if="pushReservationInfo" :reservationBooks="reservationBooks"/>
         </div>
         <div class="leftBox">
             <v-btn @click="onPersonalInfo">개인 정보</v-btn>
@@ -9,12 +10,14 @@
             <v-btn @click="myRent">나의 대출 현황</v-btn>
             <v-btn>나의 구매 현황</v-btn>
             <v-btn>희망 도서 신청 현황</v-btn>
+            <v-btn @click="myReservation">예약 신청 현황</v-btn>
         </div>
     </div>
 </template>
 
 <script>
 import MyPageRentalForm from './MyPageRentalForm.vue';
+import MyPageReservationForm from './MyPageReservationForm.vue';
 
 import { mapActions, mapState } from "vuex";
 const ServiceModule = 'ServiceModule';
@@ -23,27 +26,37 @@ const MemberModule = 'MemberModule'
 export default {
     data() {
         return {
-            pushRentalInfo: false
+            pushRentalInfo: false,
+            pushReservationInfo: false,
         }
     },
     components: {
-        MyPageRentalForm
+        MyPageRentalForm,
+        MyPageReservationForm
     },
     methods: {
-        ...mapActions(ServiceModule, ["requestPersonalInfoToSpring"]),
+        ...mapActions(ServiceModule, [
+            "requestPersonalInfoToSpring", "requestReservationInfoToSpring"
+        ]),
         onPersonalInfo(){
             
         },
         myRent() {
             this.pushRentalInfo = true;
+            this.pushReservationInfo = false;
+        },
+        myReservation() {
+            this.pushRentalInfo = false;
+            this.pushReservationInfo = true;
         }
     },
     computed: {
-        ...mapState(ServiceModule, ["rentalBooks"]),
+        ...mapState(ServiceModule, ["rentalBooks", "reservationBooks"]),
         ...mapState(MemberModule, ["memberInfo"])
     },
     mounted() {
         this.requestPersonalInfoToSpring();
+        this.requestReservationInfoToSpring();
     },
 }
 </script>

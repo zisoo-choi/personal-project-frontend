@@ -1,6 +1,6 @@
 <template lang="">
   <div>
-    <h3>{{rentalBooks[0].member.memberId}}님의 대출 현황</h3>
+    <h3>회원님의 대출 현황</h3>
     <table style="width: 100%; height: 100%">
       <tr>
         <th align="center" width="5%">대여</br>번호</th>
@@ -77,9 +77,16 @@ export default {
     },
   methods: {
     ...mapActions(ServiceModule, ["requestExtensionDate"]),
-    onExtensionClick(bookNumber) {
+    async onExtensionClick(bookNumber) {
       this.selectedRentalBook = bookNumber;
-      const extensionResult = this.requestExtensionDate(this.selectedRentalBook);
+      const extensionResult = await this.requestExtensionDate(this.selectedRentalBook);
+
+      if(extensionResult){
+        console.log("extensionResult: ",extensionResult)
+        alert("도서 연장 성공")
+      } else{
+        alert("도서 연장 실패")
+      }
     }
   }
 };

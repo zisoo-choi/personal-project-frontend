@@ -2,5 +2,6 @@ export default {
     books: [],
     book: {},
     rentalBooks: [],
-    rentalBook: {}
+    rentalBook: {},
+    reservationBooks: [],
 };

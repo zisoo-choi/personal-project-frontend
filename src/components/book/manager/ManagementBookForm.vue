@@ -4,12 +4,14 @@
             <management-book-list-form v-if="pushBook" :books="books"/>
             <management-service-form v-if="pushService" :rentalBooks="rentalBooks"/>
             <management-member-list-form v-if="pushMember" :members="members"/>
+            <management-reservation-list-form v-if="pushReservation" :reservations="reservations" />
         </div>
         <div class="rightView">
             <v-btn @click="BookManagement">Book</v-btn>
             <v-btn @click="bookRegister">Register Book</v-btn>
             <v-btn @click="RentalManagement">Rental</v-btn>
             <v-btn @click="MemberManagement">Member</v-btn>
+            <v-btn @click="ReservationManagement">Reservation</v-btn>
         </div>
     </div>
 </template>
@@ -18,6 +20,7 @@
 import ManagementBookListForm from '@/components/book/manager/ManagementBookListForm.vue';
 import ManagementServiceForm from '@/components/book/manager/ManagementServiceForm.vue'
 import ManagementMemberListForm from '@/components/book/manager/ManagementMemberListForm.vue'
+import ManagementReservationListForm from './ManagementReservationListForm.vue';
 
 import { mapActions, mapState } from "vuex";
 const BookModule = 'BookModule';
@@ -29,33 +32,44 @@ export default {
         return {
             pushBook: false,
             pushService: false,
-            pushMember: false
+            pushMember: false,
+            pushReservation: false
         }
     },
     components: {
         ManagementBookListForm,
         ManagementServiceForm,
-        ManagementMemberListForm
+        ManagementMemberListForm,
+        ManagementReservationListForm
     },
     methods: {
         BookManagement() {
             this.pushBook = true;
             this.pushMember = false;
             this.pushService = false;
+            this.pushReservation = false;
         },
         RentalManagement() {
             this.pushService = true;
             this.pushBook = false;
             this.pushMember = false;
+            this.pushReservation = false;
         },
         MemberManagement() {
             this.pushMember = true;
             this.pushService = false;
             this.pushBook = false;
+            this.pushReservation = false;
+        },
+        ReservationManagement() {
+            this.pushMember = false;
+            this.pushService = false;
+            this.pushBook = false;
+            this.pushReservation = true;
         },
         ...mapActions(BookModule, ["requestBookListToSpring"]),
         ...mapActions(MemberModule, ["requestMemberListToSpring"]),
-        ...mapActions(ServiceModule, ["requestRentalListToSpring"]),
+        ...mapActions(ServiceModule, ["requestRentalListToSpring", "requestReservationToSpring"]),
         bookRegister() {
             this.$router.push({
                 name: "ManagementRegisterBookPage"
@@ -65,12 +79,13 @@ export default {
     computed: {
         ...mapState(BookModule, ["books"]),
         ...mapState(MemberModule, ["members"]),
-        ...mapState(ServiceModule, ["rentalBooks"])
+        ...mapState(ServiceModule, ["rentalBooks", "reservations"])
     },
     mounted() {
         this.requestBookListToSpring();
         this.requestMemberListToSpring();
         this.requestRentalListToSpring();
+        this.requestReservationToSpring();
     },
 }
 </script>

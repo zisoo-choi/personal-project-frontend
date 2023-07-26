@@ -72,6 +72,14 @@
                     <button @click="onCancel">No</button>
                 </div>
             </div>
+            <div class="popup-container" v-if="onReservationPopup">
+                <div class="popup">
+                    <h3>도서 예약</h3>
+                    <p>[{{selectedBook.bookName}}] 도서의 대여 가능 재고가 없습니다.</br>예약 하시겠습니까?</p>
+                    <button @click="onReservation(selectedBook.bookNumber)">Yes</button>
+                    <button @click="onCancel">No</button>
+                </div>
+            </div>
         </table>
     </div>
 </template>
@@ -86,6 +94,7 @@ const ServiceModule = "ServiceModule"
         return {
             selectedBook: '',
             onPopup: false,
+            onReservationPopup: false,
         }
     },
     // props: ['book', 'bookNumber'], // 상위 컴포넌트로부터 bookNumber를 전달받음
@@ -100,7 +109,9 @@ const ServiceModule = "ServiceModule"
         ...mapState(MemberModule, ["memberInfo"]),
     },
     methods: {
-        ...mapActions(ServiceModule, ['requestRentalToSpring', 'requestReturnedToSpring']),
+        ...mapActions(ServiceModule, [
+            'requestRentalToSpring', 'requestReturnedToSpring', 'requestReservatopnToSpring'
+        ]),
         isLogin() {
             if (this.memberInfo !== null) {
                 return true;
@@ -110,7 +121,14 @@ const ServiceModule = "ServiceModule"
         },
         onRentClick(book) {
             this.selectedBook = book; // 선택한 회원 정보를 업데이트합니다.
-            this.onPopup = true;
+
+            // 수량이 존재하지 않으면 예약 팝업이 뜬다 !
+            if(book.rentalAmount <= 0) {
+                this.onReservationPopup = true;
+                
+            } else {
+                this.onPopup = true;
+            }
         },
         async onRent(bookNumber) {
             const isRent =  await this.requestRentalToSpring(bookNumber);
@@ -125,12 +143,26 @@ const ServiceModule = "ServiceModule"
             this.onPopup = false;
             }
         },
-        // onReturnedClick(book) {
-        //     this.selectedBook = book;
-        //     this.requestReturnedToSpring(book.bookNumber);
-        // },
+        async onReservation(bookNumber) {
+            const isReservation = await this.requestReservatopnToSpring(bookNumber);
+
+            console.log("isReservation: ", isReservation);
+
+            if(isReservation === false) {
+                alert("예약 불가")
+                this.onReservationPopup = false;
+            } else {
+                alert("도서 예약 성공 !")
+                this.onReservationPopup = false;
+            }
+        },
         onCancel() {
             this.onPopup = false;
+            this.onReservationPopup = false;
+        },
+        onReturnedClick(book) {
+            // this.selectedBook = book;
+            // this.requestReturnedToSpring(book.bookNumber);
         },
         onPurchaseClick() {
         // 구매하기 버튼이 클릭되었을 때 동작 구현

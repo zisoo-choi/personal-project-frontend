@@ -160,9 +160,9 @@ const ServiceModule = "ServiceModule"
             this.onPopup = false;
             this.onReservationPopup = false;
         },
-        onReturnedClick(book) {
-            // this.selectedBook = book;
-            // this.requestReturnedToSpring(book.bookNumber);
+        async onReturnedClick(book) {
+            this.selectedBook = book;
+            await this.requestReturnedToSpring(book.bookNumber);
         },
         onPurchaseClick() {
         // 구매하기 버튼이 클릭되었을 때 동작 구현

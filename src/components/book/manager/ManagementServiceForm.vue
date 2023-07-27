@@ -8,7 +8,7 @@
           <th align="center" width="8%">도서</th>
           <th align="center" width="12%">대여일</th>
           <th align="center" width="12%">반납</br>예정일</th>
-          <th align="center" width="12%">연장일</th>
+          <th align="center" width="12%">연장 후</br>반납 예정일체일</th>
           <th align="center" width="12%">실제</br>반납일</th>
           <th align="center" width="12%">연체일</th>
           <th align="center" width="10%">대여 상태</th>
@@ -33,7 +33,7 @@
             {{ rentalBook.estimatedRentalDate }}
           </td>
           <td align="center">
-            {{ rentalBook.extensionDate }}
+          {{ rentalBook.extensionEstimatedDate }}
           </td>
           <td align="center">
             {{ rentalBook.returnDate }}

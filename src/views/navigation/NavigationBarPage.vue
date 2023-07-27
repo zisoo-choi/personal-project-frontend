@@ -80,10 +80,16 @@
           app 
           v-model="navigation_drawer"
           v-if="navigation_drawer">
-          <v-list-item>
+          <v-list-item v-if="isLogin()">
               <v-list-item-content>
-              <v-list-item-title class="text-h6">{{memberInfo.memberId}}</v-list-item-title>
-              <v-list-item-subtitle>님 오늘도 맑은 하루 입니다 !</v-list-item-subtitle>
+                <v-list-item-title class="text-h6">{{memberInfo.memberId}}</v-list-item-title>
+                <v-list-item-subtitle>님 오늘도 맑은 하루 입니다 !</v-list-item-subtitle>
+              </v-list-item-content>
+          </v-list-item>
+          <v-list-item v-else>
+              <v-list-item-content>
+                <v-list-item-title class="text-h6">CLOUD LIBRARY</v-list-item-title>
+                <v-list-item-subtitle>로그인을 해주세요 !</v-list-item-subtitle>
               </v-list-item-content>
           </v-list-item>
 
@@ -155,6 +161,7 @@ export default {
                 { title: '희망도서' },
                 { title: '전체도서' },
             ],
+            isLoginUser: false
         };
     },
     computed: {

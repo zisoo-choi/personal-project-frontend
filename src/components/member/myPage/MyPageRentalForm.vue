@@ -17,7 +17,7 @@
       <tr v-if="!rentalBooks || (Array.isArray(rentalBooks) && rentalBooks.length === 0)">
         <td colspan="4">서비스 기록이 없습니다!</td>
       </tr>
-      <tr v-else v-for="rentalBook in rentalBooks" :key="rentalBook.memberNumber">
+      <tr v-else v-for="rentalBook in rentalBooks" :key="rentalBook.rentalNumber">
         <td align="center">
           {{ rentalBook.rentalNumber }}
         </td>
@@ -43,10 +43,10 @@
           {{ rentalBook.rentalState }}
         </td>
         <td>
-          <button @click="onExtensionClick(rentalBook.book.bookNumber)">연장</button>
+          <button @click="onExtensionClick(rentalBook.rentalNumber)">연장</button>
         </td>
         <td>
-          <button @click="onReturnedClick(rentalBook.book.bookNumber)">반납</button>
+          <button @click="onReturnedClick(rentalBook.rentalNumber)">반납</button>
         </td>
       </tr>
     </table>
@@ -73,8 +73,8 @@ export default {
     },
   methods: {
     ...mapActions(ServiceModule, ["requestExtensionDate", "requestReturnedToSpring"]),
-    async onExtensionClick(bookNumber) {
-      this.selectedRentalBook = bookNumber;
+    async onExtensionClick(rentalNumber) {
+      this.selectedRentalBook = rentalNumber;
       const extensionResult = await this.requestExtensionDate(this.selectedRentalBook);
 
       if(extensionResult){
@@ -84,8 +84,8 @@ export default {
         alert("도서 연장 실패")
       }
     },
-    async onReturnedClick(bookNumber) {
-      await this.requestReturnedToSpring(bookNumber);
+    async onReturnedClick(rentalNumber) {
+      await this.requestReturnedToSpring(rentalNumber);
     }
   }
 };

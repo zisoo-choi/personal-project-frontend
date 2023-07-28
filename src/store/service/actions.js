@@ -73,14 +73,14 @@ export default {
             commit(REQUEST_RENT_BOOK_LIST_TO_SPRING, res.data);
         })
     },
-    // 도서 반납 (아직 back 안 만들었음)
-    requestReturnedToSpring({}, bookNumber) {
+    // 도서 반납
+    requestReturnedToSpring({}, rentalNumber) {
         // axios의 기본 설정에 토큰을 포함시킵니다.
         const yourJwtToken = Cookies.get("refreshToken");
         axiosInst.defaults.headers.common['Authorization'] = `Bearer ${yourJwtToken}`;
         
         return axiosInst.post("/library-service/return", {
-            bookNumber
+            rentalNumber
         })
         .then((res) => {
             alert("도서 반납이 성공적으로 이루어졌습니다.")
@@ -102,13 +102,13 @@ export default {
         })
     },
     // 도서 반납기한 연장
-    requestExtensionDate({}, bookNumber) {
+    requestExtensionDate({}, rentalNumber) {
         // axios의 기본 설정에 토큰을 포함시킵니다.
         const yourJwtToken = Cookies.get("refreshToken");
         axiosInst.defaults.headers.common['Authorization'] = `Bearer ${yourJwtToken}`;
         
         return axiosInst.post("/library-service/extension", {
-            bookNumber
+            rentalNumber
         }).then((res) => {
             return res.data;
         }).catch(() => {

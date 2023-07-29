@@ -5,8 +5,9 @@
         <tr>
           <th align="center" width="15%">예약 번호</th>
           <th align="center" width="15%">회원 번호</th>
-          <th align="center" width="15%">회원 아이디</th>
           <th align="center" width="15%">도서 번호</th>
+          <th align="center" width="15%">도서명</th>
+          <th align="center" width="15%">회원 아이디</th>
           <th align="center" width="15%">예약 상태</th>
           <th align="center" width="20%">예약 일시</th>
         </tr>
@@ -21,10 +22,13 @@
             {{ reservationBook.member.memberNumber }}
           </td>
           <td align="center">
-            {{ reservationBook.member.memberId }}
+            {{ reservationBook.book.bookNumber }}
           </td>
           <td align="center">
-            {{ reservationBook.book.bookNumber }}
+            {{ reservationBook.book.bookName }}
+          </td>
+          <td align="center">
+            {{ reservationBook.member.memberId }}
           </td>
           <td align="center">
             {{ reservationBook.reservationState }}

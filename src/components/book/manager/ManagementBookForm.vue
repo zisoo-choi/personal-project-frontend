@@ -4,7 +4,7 @@
             <management-book-list-form v-if="pushBook" :books="books"/>
             <management-service-form v-if="pushService" :rentalBooks="rentalBooks"/>
             <management-member-list-form v-if="pushMember" :members="members"/>
-            <management-reservation-list-form v-if="pushReservation" :reservations="reservations" />
+            <management-reservation-list-form v-if="pushReservation" :reservationBooks="reservationBooks" />
         </div>
         <div class="rightView">
             <v-btn @click="BookManagement">Book</v-btn>
@@ -79,7 +79,7 @@ export default {
     computed: {
         ...mapState(BookModule, ["books"]),
         ...mapState(MemberModule, ["members"]),
-        ...mapState(ServiceModule, ["rentalBooks", "reservations"])
+        ...mapState(ServiceModule, ["rentalBooks", "reservationBooks"])
     },
     mounted() {
         this.requestBookListToSpring();

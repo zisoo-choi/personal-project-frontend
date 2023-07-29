@@ -50,6 +50,17 @@ export default {
             commit(REQUEST_HOOP_BOOK_TO_SPRING, res.data);
         })
     },
+    // 개별 희망 도서 읽기
+    requestPersonalHopeToSpring({ commit }) {
+        // axios의 기본 설정에 토큰을 포함시킵니다.
+        const yourJwtToken = Cookies.get("refreshToken");
+        axiosInst.defaults.headers.common['Authorization'] = `Bearer ${yourJwtToken}`;
+
+        return axiosInst.get("/library-service/personal-hope-list")
+        .then((res) => {
+            commit(REQUEST_HOOP_BOOK_LIST_TO_SPRING, res.data);
+        })
+    },
     // 도서 대여
     requestRentalToSpring({}, bookNumber) {
         // axios의 기본 설정에 토큰을 포함시킵니다.
@@ -90,7 +101,7 @@ export default {
             alert("문제 발생!")
         })
     },
-    // 개인 대여 기록 가져오기
+    // 개별 대여 기록 가져오기
     requestPersonalInfoToSpring({ commit }){
         // axios의 기본 설정에 토큰을 포함시킵니다.
         const yourJwtToken = Cookies.get("refreshToken");
@@ -140,7 +151,7 @@ export default {
             commit(REQUEST_RESERVATION_LIST_TO_SPRING, res.data);
          })
     },
-    // 개인 예약 도서 목록
+    // 개별 예약 도서 목록
     requestReservationInfoToSpring({ commit }) {
         // axios의 기본 설정에 토큰을 포함시킵니다.
         const yourJwtToken = Cookies.get("refreshToken");

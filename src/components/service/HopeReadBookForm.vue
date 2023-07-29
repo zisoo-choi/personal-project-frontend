@@ -25,12 +25,6 @@
                     <input type="text" :value="book.publishCompany" readonly/>
                 </td>
             </tr>
-            <!-- <tr>
-                <td>카테고리</td>
-                <td>
-                    <input type="text" :value="book.categorizationSymbol" readonly/>
-                </td>
-            </tr> -->
             <tr>
                 <td>신청일자</td>
                 <td>
@@ -39,9 +33,9 @@
             </tr>
             <tr>
                 <td>신청인</td>
-                <td>
-                    <input type="text" :value="book.member.memberId" readonly/>
-                </td>
+                <!-- 'book.member'가 정의되어 있을 때만 'memberId'를 표시 -->
+                <input type="text" v-if="book.member" :value="book.member.memberId" readonly/>
+                <span v-else>신청인 정보 없음</span>
             </tr>
         </table>
     </div>

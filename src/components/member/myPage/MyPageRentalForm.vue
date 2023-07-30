@@ -1,11 +1,13 @@
 <template lang="">
   <div>
-    <h3>회원님의 대출 현황</h3>
+    <h2>대출 기록</h2>
+    <hr class="custom-hr">
+  </br>
     <table style="width: 100%; height: 100%">
       <tr>
-        <th align="center" width="5%">대여</br>번호</th>
-        <th align="center" width="8%">도서</br>번호</th>
-        <th align="center" width="8%">도서명</th>
+        <th align="center" width="8%">대여 번호</th>
+        <th align="center" width="8%">도서 번호</th>
+        <th align="center" width="12%">도서명</th>
         <th align="center" width="12%">대여일</th>
         <th align="center" width="12%">반납</br>예정일</th>
         <th align="center" width="12%">연장 후</br>반납 예정일</th>
@@ -92,6 +94,11 @@ export default {
 </script>
   
 <style lang="css">
-
+.custom-hr {
+  width: 100%; /* Set the width of the <hr> element to 50% */
+  margin: 0 auto; /* Center the <hr> element horizontally */
+  border-color: #000; /* Set the border color (default is black) */
+  border-width: 2px; /* Set the border width (default is 1px) */
+}
 </style>
   

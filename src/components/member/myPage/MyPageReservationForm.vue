@@ -1,6 +1,8 @@
 <template lang="">
     <div>
-      <h3>회원 예약 목록</h3>
+      <h2>회원 예약 목록</h2>
+      <hr class="custom-hr">
+  </br>
       <table style="width: 100%; height: 100%">
         <tr>
           <th align="center" width="15%">예약 번호</th>

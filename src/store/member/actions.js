@@ -2,7 +2,6 @@ import {
     REQUEST_USER_TOKEN_TO_SPRING,
     REQUEST_USER_INFO_TO_SPRING,
     REQUEST_MEMBER_LIST_TO_SPRING,
-    REQUEST_MEMBER_TO_SPRING
   } from "./mutation-types";
 
 import axiosInst from "@/utility/axiosInst";

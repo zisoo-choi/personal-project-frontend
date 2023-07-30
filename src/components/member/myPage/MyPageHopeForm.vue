@@ -11,30 +11,30 @@
           <th align="center" width="20%">등록 일시</th>
           <th align="center" width="15%">회원 아이디</th>
         </tr>
-        <tr v-if="!books || (Array.isArray(books) && books.length === 0)">
+        <tr v-if="!hopeBooks || (Array.isArray(hopeBooks) && hopeBooks.length === 0)">
           <td colspan="4">현재 등록된 회원이 없습니다!</td>
         </tr>
-        <tr v-else v-for="book in books" :key="book.reservationNumber">
+        <tr v-else v-for="hopeBook in hopeBooks" :key="hopeBook.reservationNumber">
           <td align="center">
-            {{ book.hopeBookNumber }}
+            {{ hopeBook.hopeBookNumber }}
           </td>
           <td align="center">
-            {{ book.member.memberNumber }}
+            {{ hopeBook.member.memberNumber }}
           </td>
           <td align="center">
-            {{ book.bookName }}
+            {{ hopeBook.bookName }}
           </td>
           <td align="center">
-            {{ book.author }}
+            {{ hopeBook.author }}
           </td>
           <td align="center">
-            {{ book.publishCompany }}
+            {{ hopeBook.publishCompany }}
           </td> 
           <td align="center">
-            {{ book.applicationDate }}
+            {{ hopeBook.applicationDate }}
           </td>  
           <td align="center">
-            {{ book.member.memberId }}
+            {{ hopeBook.member.memberId }}
           </td>
         </tr>
       </table>
@@ -50,7 +50,7 @@
       };
     },
     props: {
-        books: {
+        hopeBooks: {
             type: Array,
       },
     },

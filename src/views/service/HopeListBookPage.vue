@@ -16,7 +16,7 @@
                 >
                 도서 신청
             </v-btn>
-            <hope-list-book-form :books="books"/>
+            <hope-list-book-form :hopeBooks="hopeBooks"/>
         </div>
     </div>
 </template>
@@ -38,7 +38,7 @@ export default {
         HopeListBookForm
     },
     computed: {
-        ...mapState(ServiceModule, ["books"]),
+        ...mapState(ServiceModule, ["hopeBooks"]),
         ...mapState(MemberModule, ["memberInfo"]),
     },
     mounted() {

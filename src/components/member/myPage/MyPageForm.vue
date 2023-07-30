@@ -3,7 +3,7 @@
         <div class="rightBox">
             <my-page-rental-form v-if="pushRentalInfo" :rentalBooks="rentalBooks"/>
             <my-page-reservation-form v-if="pushReservationInfo" :reservationBooks="reservationBooks"/>
-            <my-page-hope-form v-if="pushHopeInfo" :books="books"/>
+            <my-page-hope-form v-if="pushHopeInfo" :hopeBooks="hopeBooks"/>
         </div>
         <div class="leftBox">
             <v-btn @click="onPersonalInfo">개인 정보</v-btn>
@@ -65,7 +65,7 @@ export default {
     },
     computed: {
         ...mapState(ServiceModule, [
-            "rentalBooks", "reservationBooks", "books"
+            "rentalBooks", "reservationBooks", "hopeBooks"
         ]),
         ...mapState(MemberModule, ["memberInfo"])
     },

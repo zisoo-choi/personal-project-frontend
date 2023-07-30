@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-        <hope-read-book-form v-if="book" :book="book" />
+        <hope-read-book-form v-if="hopeBook" :hopeBook="hopeBook" />
         <p v-else>로딩중 .......</p>
         <router-link :to="{ name: 'HopeListBookPage' }"> 돌아가기 </router-link>
     </div>
@@ -24,7 +24,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(ServiceModule, ["book"])
+        ...mapState(ServiceModule, ["hopeBook"])
     },
     methods: {
         ...mapActions(ServiceModule, ["requestHopeBookReadToSpring"]),

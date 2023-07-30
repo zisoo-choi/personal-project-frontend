@@ -8,10 +8,10 @@ import {
 
 export default {
   [REQUEST_HOOP_BOOK_LIST_TO_SPRING](state, receivedData) {
-    state.books = receivedData;
+    state.hopeBooks = receivedData;
   },
   [REQUEST_HOOP_BOOK_TO_SPRING](state,receivedData) {
-    state.book = receivedData;
+    state.hopeBook = receivedData;
   },
   [REQUEST_RENT_BOOK_LIST_TO_SPRING](state,receivedData) {
     state.rentalBooks = receivedData;

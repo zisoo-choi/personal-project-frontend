@@ -1,7 +1,7 @@
 export default {
-    books: [],
-    book: {},
     rentalBooks: [],
     rentalBook: {},
     reservationBooks: [],
+    hopeBooks: [],
+    hopeBook: {}
 };

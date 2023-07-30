@@ -28,10 +28,16 @@
         </td>
       -->
         <td align="center">
-          {{ book.bookPublishCompany }} <!-- 게시물 작성자 뿌린다. -->
+          {{ book.bookNumber }}
         </td>
         <td align="center">
-          {{ book.createDate }} <!-- 게시물 시간 뿌린다. -->
+          {{ book.bookName }}
+        </td>
+        <td align="center">
+          {{ book.bookPublishCompany }}
+        </td>
+        <td align="center">
+          {{ book.createDate }}
         </td>
       </tr>
     </table>

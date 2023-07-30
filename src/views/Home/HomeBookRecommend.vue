@@ -55,7 +55,7 @@ export default {
 <style lang="css">
 .bookList{
     /* background-color: rgb(41, 41, 41); */
-    background-color: #d7f2ff;
+    background-color: #B3E5FC;
     height: 500px;
     padding: 40px;
     width: 100%;

@@ -1,9 +1,9 @@
 <template lang="">
     <nav>
-        <v-app-bar color="#d7f2ff" app elevation="0">
+        <v-app-bar :color="isWhiteBackground ? 'white' : '#B3E5FC'" app elevation="0">
             <v-app-bar-nav-icon color="black" @click="navigation_drawer = !navigation_drawer"/>
             <!-- 로고가 들어갈 타이틀 문구 있는 곳 -->
-            <v-btn depressed color="#d7f2ff" @click="goToHome">
+            <v-btn depressed :color="isWhiteBackground ? 'white' : '#B3E5FC'" @click="goToHome">
               <v-toolbar-title class="text-uppercase text--darken-4">
                 <b>cloud library</b>
               </v-toolbar-title>
@@ -18,7 +18,7 @@
               <v-menu offset-y open-on-hover elevation="0">
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
-                    color="#d7f2ff"
+                  :color="isWhiteBackground ? 'white' : '#B3E5FC'"
                     v-bind="attrs"
                     v-on="on"
                     depressed
@@ -146,6 +146,12 @@ const MemberModule = 'MemberModule';
 
 export default {
   components: { NavigationSearchBarPage },
+  props: {
+    isWhiteBackground: {
+      type: Boolean,
+      default: false
+    }
+  },
     data() {
         return {
             navigation_drawer: false,

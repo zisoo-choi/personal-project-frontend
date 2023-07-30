@@ -11,7 +11,7 @@
           <th align="center" width="20%">예약 일시</th>
         </tr>
         <tr v-if="!reservationBooks || (Array.isArray(reservationBooks) && reservationBooks.length === 0)">
-          <td colspan="4">현재 등록된 회원이 없습니다!</td>
+          <td colspan="4">현재 등록된 예약 목록이 없습니다!</td>
         </tr>
         <tr v-else v-for="reservationBook in reservationBooks" :key="reservationBook.reservationNumber">
           <td align="center">

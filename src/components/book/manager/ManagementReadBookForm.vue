@@ -55,17 +55,40 @@
                     <input type="text" :value="book.registrationDate" readonly/>
                 </td>
             </tr>
+            <tr>
+                <td>사진</td>
+                <td>
+                    <div>
+                        <img :src="getImageUrl(book.filePathList)" style="max-width: 100%; margin-top: 10px;" />
+                    </div>
+                </td>
+            </tr>
         </table>
     </div>
 </template>
 
 <script>
+import envS3 from '../../../../envS3';
+
 export default {
     name: "ManagementReadBookForm",
     props: {
         book: {
             type: Object,
             required: true,
+        }
+    },
+    data() {
+        return {
+            awsBucketName: envS3.env.VUE_APP_S3_BUCKET_NAME,
+            awsBucketRegion: envS3.env.VUE_APP_S3_REGION,
+            awsIdentityPoolId: envS3.env.VUE_APP_S3_IDENTITY_POOL_ID,
+        }
+    },
+    methods:{
+        // S3에서 업로드한 사진 가져오기
+        getImageUrl(filePath){
+            return `https://${this.awsBucketName}.s3.${this.awsBucketRegion}.amazonaws.com/${filePath}`
         }
     }
 }

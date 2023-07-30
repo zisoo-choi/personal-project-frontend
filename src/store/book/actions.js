@@ -77,7 +77,8 @@ export default {
             categorizationSymbol,
             content,
             updateDate,
-            bookAmount
+            bookAmount,
+            filePathList
         } = payload;
 
         return axiosInst.post("/book-list/register-book", {
@@ -87,7 +88,8 @@ export default {
             categorizationSymbol,
             content,
             updateDate,
-            bookAmount
+            bookAmount,
+            filePathList
         }).then((res) => {
             alert("게시물 등록 성공!");
             return res;

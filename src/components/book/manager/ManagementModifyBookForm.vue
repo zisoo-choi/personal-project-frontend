@@ -62,6 +62,14 @@
                         <input type="text" v-model="updateDate" />
                     </td>
                 </tr>
+                <tr>
+                    <td>사진</td> <!-- 수정 때 사진 변경 불가능 -->
+                    <td>
+                        <div>
+                            <img :src="getImageUrl(book.filePathList)" style="max-width: 100%; margin-top: 10px;" disabled/>
+                        </div>
+                    </td>
+                </tr>
             </table>
             <div>
                 <button type="submit">수정 완료</button>
@@ -78,6 +86,8 @@
 </template>
 
 <script>
+import envS3 from '../../../../envS3';
+
 export default {
     props: {
         book: {
@@ -89,7 +99,10 @@ export default {
         return {
             content: "",
             updateDate: "",
-            bookAmount: ""
+            bookAmount: "",
+            awsBucketName: envS3.env.VUE_APP_S3_BUCKET_NAME,
+            awsBucketRegion: envS3.env.VUE_APP_S3_REGION,
+            awsIdentityPoolId: envS3.env.VUE_APP_S3_IDENTITY_POOL_ID,
         };
     },
     created() {
@@ -112,6 +125,10 @@ export default {
             );
 
             this.$emit("submit", { bookAmount, content, updateDate });
+        },
+        // S3에서 업로드한 사진 가져오기
+        getImageUrl(filePath){
+            return `https://${this.awsBucketName}.s3.${this.awsBucketRegion}.amazonaws.com/${filePath}`
         }
     }
 }

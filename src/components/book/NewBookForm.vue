@@ -11,7 +11,7 @@
                             name: 'ReadBookPage',
                             params: { bookNumber:book.bookNumber.toString() },
                         }">
-                        <img src="@/assets/downloadImg/블랙쉼.jpg" style="max-width: 65%; height: auto;"/>
+                        <img :src="getImageUrl(book.filePathList)" style="max-width: 100%; margin-top: 10px;"/>
                         <div>
                             {{ book.bookName }}
                         </div>
@@ -23,10 +23,30 @@
 </template>
 
 <script>
+import envS3 from '../../../envS3';
+
 export default {
     props: {
         books: {
             type: Array,
+        },
+    },
+    data() {
+        return {
+        awsBucketName: envS3.env.VUE_APP_S3_BUCKET_NAME,
+        awsBucketRegion: envS3.env.VUE_APP_S3_REGION,
+        awsIdentityPoolId: envS3.env.VUE_APP_S3_IDENTITY_POOL_ID,
+        };
+    },
+    methods: {
+        // S3에서 업로드한 사진 가져오기
+        getImageUrl(filePath) {
+            if(filePath != null) {
+                return `https://${this.awsBucketName}.s3.${this.awsBucketRegion}.amazonaws.com/${filePath}`;
+            }
+            else {
+                return `https://${this.awsBucketName}.s3.${this.awsBucketRegion}.amazonaws.com/${basicFile}`;
+            }
         },
     },
 }

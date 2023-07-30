@@ -1,19 +1,20 @@
 <template lang="">
     <div>
-        <tr v-if="!books || (Array.isArray(books) && books.length === 0)">
+        <tr v-if="!hopeBooks || (Array.isArray(hopeBooks) && hopeBooks.length === 0)">
             <td colspan="4">현재 등록된 도서 목록이 없습니다!</td>
         </tr>
-        <v-row v-if="books && books.length > 0">
-            <v-col v-for="book in books" :key="book.hopeBookNumber" cols="2">
+        <v-row v-if="hopeBooks && hopeBooks.length > 0">
+            <v-col v-for="hopebook in hopeBooks" :key="hopebook.hopeBookNumber" cols="2">
                 <div align="center"> 
                     <router-link
                         :to="{
                             name: 'HopeReadBookPage',
-                            params: { hopeBookNumber:book.hopeBookNumber.toString() },
+                            params: { hopeBookNumber:hopebook.hopeBookNumber.toString() },
                         }">
-                        <img src="@/assets/downloadImg/도둑맞은 집중력.jpg" style="max-width: 65%; height: auto;"/>
+                        <!-- <img src="@/assets/downloadImg/도둑맞은 집중력.jpg" style="max-width: 65%; height: auto;"/> -->
+                        <img :src="getImageUrl(basicFile)" style="max-width: 100%; margin-top: 10px;"/>
                         <div>
-                            {{ book.bookName }}
+                            {{ hopebook.bookName }}
                         </div>
                     </router-link>
                 </div>
@@ -24,10 +25,31 @@
 </template>
   
 <script>
+import envS3 from '../../../envS3';
+
 export default {
     props: {
-        books: {
+        hopeBooks: {
             type: Array,
+        },
+    },
+    data() {
+        return {
+        awsBucketName: envS3.env.VUE_APP_S3_BUCKET_NAME,
+        awsBucketRegion: envS3.env.VUE_APP_S3_REGION,
+        awsIdentityPoolId: envS3.env.VUE_APP_S3_IDENTITY_POOL_ID,
+        basicFile : "basicFile.jpg"
+        };
+    },
+    methods: {
+        // S3에서 업로드한 사진 가져오기
+        getImageUrl(filePath) {
+            if(filePath != null) {
+                return `https://${this.awsBucketName}.s3.${this.awsBucketRegion}.amazonaws.com/${filePath}`;
+            }
+            else {
+                return `https://${this.awsBucketName}.s3.${this.awsBucketRegion}.amazonaws.com/${basicFile}`;
+            }
         },
     },
 };

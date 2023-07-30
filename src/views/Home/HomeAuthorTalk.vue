@@ -3,7 +3,8 @@
         <v-row class="authorBox">
             <!-- <v-col> -->
                 <div class="authorInImg">
-                    <v-img src="@/assets/downloadImg/세이노의 가르침.jpg" class="imgAuthor" contain/>
+                    <!-- <v-img src="@/assets/downloadImg/세이노의 가르침.jpg" class="imgAuthor" contain/> -->
+                    <v-img :src="getImageUrl(bookfile)" contain class="imgAuthor"/>
                 </div>
             <!-- </v-col> -->
             <v-col>
@@ -19,17 +20,29 @@
 </template>
 
 <script>
+import envS3 from '../../../envS3';
+
 export default {
     data () {
         return {
-            images: [
-                require('@/assets/downloadImg/꿀벌의 예언.jpg'),
-                require('@/assets/downloadImg/도둑맞은 집중력.jpg'),
-                require('@/assets/downloadImg/블랙쉼.jpg'),
-                require('@/assets/downloadImg/세이노의 가르침.jpg'),
-                require('@/assets/downloadImg/역행자.jpg'),
-                require('@/assets/downloadImg/판다.jpg'),
-            ]
+            // images: [
+            //     require('@/assets/downloadImg/꿀벌의 예언.jpg'),
+            //     require('@/assets/downloadImg/도둑맞은 집중력.jpg'),
+            //     require('@/assets/downloadImg/블랙쉼.jpg'),
+            //     require('@/assets/downloadImg/세이노의 가르침.jpg'),
+            //     require('@/assets/downloadImg/역행자.jpg'),
+            //     require('@/assets/downloadImg/판다.jpg'),
+            // ],
+            awsBucketName: envS3.env.VUE_APP_S3_BUCKET_NAME,
+            awsBucketRegion: envS3.env.VUE_APP_S3_REGION,
+            awsIdentityPoolId: envS3.env.VUE_APP_S3_IDENTITY_POOL_ID,
+            bookfile: "세이노의 가르침.jpg",
+        }
+    },
+    methods:{
+        // S3에서 업로드한 사진 가져오기
+        getImageUrl(filePath){
+            return `https://${this.awsBucketName}.s3.${this.awsBucketRegion}.amazonaws.com/${filePath}`
         }
     }
 }

@@ -26,12 +26,6 @@
                         <input type="text" v-model="publishCompany"/>
                     </td>
                 </tr>
-                <!-- <tr>
-                    <td>카테고리</td>
-                    <td>
-                        <input type="text" v-model="categorizationSymbol"/>
-                    </td>
-                </tr> -->
                 <tr>
                     <th>카테고리</th>
                     <td>
@@ -54,6 +48,10 @@
                         <textarea cols="60" rows="20" v-model="content" />
                     </td>
                 </tr>
+                <tr>
+                    <th>사진 등록</th>
+                    <s3-image-upload @fileSelected="onFileSelected"/>
+                </tr>
             </table>
             <div>
                 <v-btn type="submit">등록 완료</v-btn>
@@ -66,6 +64,8 @@
 </template>
 
 <script>
+import S3ImageUpload from './S3ImageUpload.vue';
+
 export default {
     data() {
         return {
@@ -76,10 +76,16 @@ export default {
             content: "",
             updateDate: "",
             bookAmount: "",
+            filePathList: "", // 자식 컴포넌트에서 받아온 파일 key 값을 저장할 변수
         };
+    },
+    components: {
+        S3ImageUpload
     },
     methods: {
         onSubmit() {
+            console.log('Selected File Key:', this.filePathList);
+
             const {
                 bookName,
                 author,
@@ -87,7 +93,8 @@ export default {
                 categorizationSymbol,
                 content,
                 updateDate,
-                bookAmount
+                bookAmount,
+                filePathList
             } = this;
             this.$emit("submit",
             { bookName,
@@ -96,9 +103,13 @@ export default {
                 categorizationSymbol,
                 content,
                 updateDate,
-                bookAmount
+                bookAmount,
+                filePathList
             });
-        }
+        },
+        onFileSelected(fileKey) {
+            this.filePathList = fileKey;
+        },
     }
 }
 </script>

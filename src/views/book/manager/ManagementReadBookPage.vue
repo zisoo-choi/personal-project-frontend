@@ -1,6 +1,8 @@
 <template lang="">
-    <div>
-        <h2>{{ book.bookName }}</h2>
+    <div class="ReadFull">
+        <div class="bookTitle">
+            <h2>{{ book.bookName }}</h2>
+        </div>
         <management-read-book-form v-if="book" :book="book" />
         <p v-else>로딩중 .......</p>
 

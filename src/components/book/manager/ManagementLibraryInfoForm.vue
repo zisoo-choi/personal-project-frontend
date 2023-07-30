@@ -9,15 +9,15 @@
             </div>
             <div class="memberServiceSimpleInfo">
                 <div class="rentalInfo">
-                    <div class="boxInTitle">대여 중</div>
+                    <div class="boxInTitle">대여 도서</div>
                     <div class="boxInContent">{{managerRentalAmount}} 건</div>
                 </div>
                 <div class="reservationInfo">
-                    <div class="boxInTitle">예약 중</div>
+                    <div class="boxInTitle">예약 도서</div>
                     <div class="boxInContent">{{managerReservationAmount}} 건</div>
                 </div>
                 <div class="applicationInfo">
-                    <div class="boxInTitle">신청 현황</div>
+                    <div class="boxInTitle">희망도서</div>
                     <div class="boxInContent">{{managerhopeAmount}} 건</div>
                 </div>
             </div>

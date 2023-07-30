@@ -1,9 +1,13 @@
 <template lang="">
-    <div>
-        <table>
+    <div class="book-container">
+        <div class="book-image">
+            <v-img :src="getImageUrl(book.filePathList)" class="imageCss" style="width: 300px"/>
+        </div>
+        <div class="book-details">
+        <table class="tableCss">
             <tr>
                 <td>도서 번호</td>
-                <td>
+                <td>z
                     <input type="text" :value="book.bookNumber" readonly/>
                 </td>
             </tr>
@@ -46,7 +50,7 @@
             <tr>
                 <td>관리자</td>
                 <td>
-                    <input type="text" :value="book.managerNumber" readonly/>
+                    <input type="text" :value="book.manager.memberId" readonly/>
                 </td>
             </tr>
             <tr>
@@ -55,18 +59,18 @@
                     <input type="text" :value="book.registrationDate" readonly/>
                 </td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td>사진</td>
                 <td>
                     <div>
                         <img :src="getImageUrl(book.filePathList)" style="max-width: 100%; margin-top: 10px;" />
                     </div>
                 </td>
-            </tr>
+            </tr> -->
         </table>
+        </div>
     </div>
 </template>
-
 <script>
 import envS3 from '../../../../envS3';
 
@@ -94,6 +98,6 @@ export default {
 }
 </script>
 
-<style lang="">
+<style lang="css">
     
 </style>

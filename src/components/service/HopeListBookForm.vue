@@ -7,6 +7,7 @@
             <v-col v-for="hopebook in hopeBooks" :key="hopebook.hopeBookNumber" cols="2">
                 <div align="center"> 
                     <router-link
+                        class="lineZero"
                         :to="{
                             name: 'HopeReadBookPage',
                             params: { hopeBookNumber:hopebook.hopeBookNumber.toString() },

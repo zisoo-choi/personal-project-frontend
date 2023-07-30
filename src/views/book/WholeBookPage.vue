@@ -71,7 +71,7 @@ export default {
 .full{
     background-color: #B3E5FC;
     width: 100%;
-    height: 1250px;
+    height: 200%;
     color: black;
 }
 .btn-container {

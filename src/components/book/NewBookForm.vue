@@ -7,6 +7,7 @@
             <v-col v-for="book in books" :key="book.bookNumber" cols="2">
                 <div align="center"> 
                     <router-link
+                        class="lineZero"
                         :to="{
                             name: 'ReadBookPage',
                             params: { bookNumber:book.bookNumber.toString() },
@@ -51,6 +52,8 @@ export default {
     },
 }
 </script>
-<style lang="">
-    
+<style lang="css">
+.lineZero {
+    text-decoration: none;
+}
 </style>

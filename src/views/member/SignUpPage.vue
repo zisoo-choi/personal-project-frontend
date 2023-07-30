@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="full">
+    <div class="signUpColor">
         <sign-up-form @submit="onSubmit"></sign-up-form>
     </div>
 </template>
@@ -27,6 +27,8 @@ export default {
 }
 </script>
 
-<style lang="">
-    
+<style lang="css">
+    .signUpColor{
+        background-color: #B3E5FC;
+    }
 </style>

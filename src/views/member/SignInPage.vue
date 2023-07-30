@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="full">
+    <div class="SignInColor">
         <sign-in-form @submit="onSubmit"></sign-in-form>
     </div>
 </template>
@@ -29,4 +29,7 @@ export default {
 </script>
 
 <style lang="css">
+.SignInColor{
+    background-color: #B3E5FC;
+}
 </style>

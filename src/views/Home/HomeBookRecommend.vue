@@ -12,7 +12,7 @@
                     <h1>읽으면 지식이 쌓인다</h1>
                     <h1>오늘의 추천 도서</h1>
                 </br>
-                    <button type="button" class="goToRead">책 읽으러 가기</button>
+                    <button type="button" class="goToRead" @click="goToReadPage">책 읽으러 가기</button>
                 </div>
             </v-col>
             <v-col cols="6">
@@ -47,6 +47,11 @@ export default {
         // S3에서 업로드한 사진 가져오기
         getImageUrl(filePath){
             return `https://${this.awsBucketName}.s3.${this.awsBucketRegion}.amazonaws.com/${filePath}`
+        },
+        goToReadPage() {
+            this.$router.push({
+                name: "WholeBookPage"
+            });
         }
     }
 }

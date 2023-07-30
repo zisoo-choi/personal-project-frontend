@@ -14,6 +14,8 @@
         <v-btn style="margin:35px; color:white; background-color:rgb(41, 41, 41); width:90px; height: 60px; border-radius: 15px;">new</br>서점</v-btn>
       </div> -->
       <home-author-talk />
+    </br>
+  </br>
     </div>
 </template>
 

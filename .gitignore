@@ -26,3 +26,4 @@ pnpm-debug.log*
 docker-compose.yml
 .env.development
 .env.production
+envS3.js

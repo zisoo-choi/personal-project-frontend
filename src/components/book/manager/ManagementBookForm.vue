@@ -8,12 +8,12 @@
             <management-hope-book-list-form v-if="pushHope" :hopeBooks="hopeBooks"/>
         </div>
         <div class="rightView">
-            <v-btn @click="BookManagement">Book</v-btn>
-            <v-btn @click="MemberManagement">Member</v-btn>
-            <v-btn @click="bookRegister">Register Book</v-btn>
-            <v-btn @click="HopeManagement">Hope Book</v-btn>
-            <v-btn @click="RentalManagement">Rental Book</v-btn>
-            <v-btn @click="ReservationManagement">Reservation Book</v-btn>
+            <button class="myPageBtn" @click="BookManagement">Book</button>
+            <button class="myPageBtn" @click="MemberManagement">Member</button>
+            <button class="myPageBtn" @click="bookRegister">Register Book</button>
+            <button class="myPageBtn" @click="HopeManagement">Hope Book</button>
+            <button class="myPageBtn" @click="RentalManagement">Rental Book</button>
+            <button class="myPageBtn" @click="ReservationManagement">Reservation Book</button>
         </div>
     </div>
 </template>
@@ -116,21 +116,20 @@ export default {
   display: flex; /* Flexbox 레이아웃 활성화 */
   
 }
-
 .mainView {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 80%;
   height: 1250px;
+  order: 2; /* Added order property to reorder the element */
 }
-
 .rightView {
   display: flex; /* 자식 요소를 세로로 배치하기 위해 Flexbox를 사용 */
   flex-direction: column; /* 자식 요소의 배치 방향을 세로로 설정 */
-  border: 1px solid black;
-  width: 20%;
+  /* border: 1px solid black; */
+  width: 15%;
   height: 1250px;
+  order: 1; /* Added order property to reorder the element */
 }
-
 .rightView v-btn {
     margin-bottom: 10px;
 }

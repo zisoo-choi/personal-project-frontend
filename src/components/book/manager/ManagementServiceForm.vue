@@ -1,6 +1,7 @@
 <template lang="">
     <div>
-      <h3>도서관 서비스 현황</h3>
+      <h2>도서관 서비스 현황</h2>
+      <hr class="custom-hr">
       <table style="width: 100%; height: 100%">
         <tr>
           <th align="center" width="5%">대여</br>번호</th>

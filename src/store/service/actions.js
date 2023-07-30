@@ -3,8 +3,13 @@ import {
     REQUEST_HOOP_BOOK_LIST_TO_SPRING,
     REQUEST_HOOP_BOOK_TO_SPRING,
     REQUEST_RENT_BOOK_LIST_TO_SPRING,
-    REQUEST_RENT_BOOK_TO_SPRING,
     REQUEST_RESERVATION_LIST_TO_SPRING,
+    REQUEST_PERSONAL_RENTAL_AMOUNT_TO_SPRING,
+    REQUEST_PERSONAL_RESERVATION_AMOUNT_TO_SPRING,
+    REQUEST_PERSONAL_HOPE_AMOUNT_TO_SPRING,
+    REQUEST_MANAGEMENT_RENTAL_AMOUNT_TO_SPRING,
+    REQUEST_MANAGEMENT_RESERVATION_AMOUNT_TO_SPRING,
+    REQUEST_MANAGEMENT_HOPE_AMOUNT_TO_SPRING
   } from "./mutation-types";
 
 import axiosInst from "@/utility/axiosInst";
@@ -160,6 +165,72 @@ export default {
         return axiosInst.get("/library-service/personal-reservation-list")
         .then((res) => {
             commit(REQUEST_RESERVATION_LIST_TO_SPRING, res.data);
+        })
+    },
+    // 개별 대여 건수
+    requestPersonalRentalAmountToSpring({ commit }) {
+        // axios의 기본 설정에 토큰을 포함시킵니다.
+        const yourJwtToken = Cookies.get("refreshToken");
+        axiosInst.defaults.headers.common['Authorization'] = `Bearer ${yourJwtToken}`;
+
+        return axiosInst.get("/library-service/personal-rental-amount")
+        .then((res) => {
+            commit(REQUEST_PERSONAL_RENTAL_AMOUNT_TO_SPRING, res.data);
+        })
+    },
+    // 개별 예약 건수
+    requestPersonalReservationAmountToSpring({ commit }) {
+        // axios의 기본 설정에 토큰을 포함시킵니다.
+        const yourJwtToken = Cookies.get("refreshToken");
+        axiosInst.defaults.headers.common['Authorization'] = `Bearer ${yourJwtToken}`;
+
+        return axiosInst.get("/library-service/personal-reservation-amount")
+        .then((res) => {
+            commit(REQUEST_PERSONAL_RESERVATION_AMOUNT_TO_SPRING, res.data);
+        })
+    },
+    // 개별 희망 도서 신청 건수
+    requestPersonalHopeAmountToSpring({ commit }) {
+        // axios의 기본 설정에 토큰을 포함시킵니다.
+        const yourJwtToken = Cookies.get("refreshToken");
+        axiosInst.defaults.headers.common['Authorization'] = `Bearer ${yourJwtToken}`;
+
+        return axiosInst.get("/library-service/personal-hope-amount")
+        .then((res) => {
+            commit(REQUEST_PERSONAL_HOPE_AMOUNT_TO_SPRING, res.data);
+        })
+    },
+    // 모든 회원의 대여 건수
+    requestManagementRentalAmountToSpring({ commit }) {
+        // axios의 기본 설정에 토큰을 포함시킵니다.
+        const yourJwtToken = Cookies.get("refreshToken");
+        axiosInst.defaults.headers.common['Authorization'] = `Bearer ${yourJwtToken}`;
+
+        return axiosInst.get("/library-service/management-rental-amount")
+        .then((res) => {
+            commit(REQUEST_MANAGEMENT_RENTAL_AMOUNT_TO_SPRING, res.data);
+        })
+    },
+    // 모든 회원의 예약 건수
+    requestManagementReservationAmountToSpring({ commit }) {
+        // axios의 기본 설정에 토큰을 포함시킵니다.
+        const yourJwtToken = Cookies.get("refreshToken");
+        axiosInst.defaults.headers.common['Authorization'] = `Bearer ${yourJwtToken}`;
+
+        return axiosInst.get("/library-service/management-reservation-amount")
+        .then((res) => {
+            commit(REQUEST_MANAGEMENT_RESERVATION_AMOUNT_TO_SPRING, res.data);
+        })
+    },
+    // 모든 회원의 희망 도서 신청 건수
+    requestManagementHopeAmountToSpring({ commit }) {
+        // axios의 기본 설정에 토큰을 포함시킵니다.
+        const yourJwtToken = Cookies.get("refreshToken");
+        axiosInst.defaults.headers.common['Authorization'] = `Bearer ${yourJwtToken}`;
+
+        return axiosInst.get("/library-service/management-hope-amount")
+        .then((res) => {
+            commit(REQUEST_MANAGEMENT_HOPE_AMOUNT_TO_SPRING, res.data);
         })
     }
 }

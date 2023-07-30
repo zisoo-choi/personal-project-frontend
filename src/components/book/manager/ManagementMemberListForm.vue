@@ -1,6 +1,7 @@
 <template lang="">
   <div>
-    <h3>회원 목록</h3>
+    <h2>회원 목록</h2>
+    <hr class="custom-hr">
     <table style="width: 100%; height: 100%">
       <tr>
         <th align="center" width="10%">회원</br>번호</th>

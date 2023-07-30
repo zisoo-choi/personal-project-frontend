@@ -1,6 +1,7 @@
 <template lang="">
     <div>
-      <h3>희망 도서 목록</h3>
+      <h2>희망 도서 목록</h2>
+      <hr class="custom-hr">
       <table style="width: 100%; height: 100%">
         <tr>
           <th align="center" width="15%">신청 번호</th>

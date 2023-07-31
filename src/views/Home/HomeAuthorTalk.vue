@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import envS3 from '../../../envS3';
 
 export default {
     data () {
@@ -33,9 +32,9 @@ export default {
             //     require('@/assets/downloadImg/역행자.jpg'),
             //     require('@/assets/downloadImg/판다.jpg'),
             // ],
-            awsBucketName: envS3.env.VUE_APP_S3_BUCKET_NAME,
-            awsBucketRegion: envS3.env.VUE_APP_S3_REGION,
-            awsIdentityPoolId: envS3.env.VUE_APP_S3_IDENTITY_POOL_ID,
+            awsBucketName: process.env.VUE_APP_S3_BUCKET_NAME,
+            awsBucketRegion: process.env.VUE_APP_S3_REGION,
+            awsIdentityPoolId: process.env.VUE_APP_S3_IDENTITY_POOL_ID,
             bookfile: "세이노의 가르침.jpg",
         }
     },

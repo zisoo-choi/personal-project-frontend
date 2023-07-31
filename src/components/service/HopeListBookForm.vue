@@ -26,7 +26,6 @@
 </template>
   
 <script>
-import envS3 from '../../../envS3';
 
 export default {
     props: {
@@ -36,9 +35,9 @@ export default {
     },
     data() {
         return {
-        awsBucketName: envS3.env.VUE_APP_S3_BUCKET_NAME,
-        awsBucketRegion: envS3.env.VUE_APP_S3_REGION,
-        awsIdentityPoolId: envS3.env.VUE_APP_S3_IDENTITY_POOL_ID,
+        awsBucketName: process.env.VUE_APP_S3_BUCKET_NAME,
+        awsBucketRegion: process.env.VUE_APP_S3_REGION,
+        awsIdentityPoolId: process.env.VUE_APP_S3_IDENTITY_POOL_ID,
         basicFile : "basicFile.jpg"
         };
     },

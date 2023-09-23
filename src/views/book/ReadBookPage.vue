@@ -5,11 +5,18 @@
         </div>
         <read-book-form v-if="book" :book="book" />
         <p v-else>로딩중 .......</p>
-        <router-link v-if="isManager()" :to="{ name: 'ModifyBookPage', params: { bookNumber } }">
-            도서 수정
-        </router-link>
-        <button v-if="isManager()" @click="onDelete">도서 삭제</button>
-        <router-link class="returnBtn" :to="{ name: 'NewBookPage' }"> 돌아가기 </router-link>
+
+        <div class="bookBottomBtn" style="text-align: center;">
+            <button class="bookBtn1">
+                <router-link v-if="isManager()" :to="{ name: 'ModifyBookPage', params: { bookNumber } }" style="text-decoration:none; color: white">
+                    도서 수정
+                </router-link>
+            </button>
+            <button v-if="isManager()" @click="onDelete" class="bookBtn2">도서 삭제</button>
+            <button class="bookBtn3">
+                <router-link :to="{ name: 'NewBookPage' }" style="text-decoration:none; color: white"> 돌아가기 </router-link>
+            </button>
+        </div>
     </div>
 </template>
 

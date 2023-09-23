@@ -6,11 +6,17 @@
         <management-read-book-form v-if="book" :book="book" />
         <p v-else>로딩중 .......</p>
 
-        <router-link v-if="isManager()" :to="{ name: 'ManagementModifyBookPage', params: { bookNumber } }">
-            도서 수정
-        </router-link>
-        <button v-if="isManager()" @click="onDelete">도서 삭제</button>
-        <router-link :to="{ name: 'ManagementBookPage' }"> 돌아가기 </router-link>
+        <div class="bookBottomBtn" style="text-align: center;">
+            <button class="bookBtn1">
+                <router-link v-if="isManager()" :to="{ name: 'ManagementModifyBookPage', params: { bookNumber } }" style="text-decoration:none; color: white">
+                    도서 수정
+                </router-link>
+            </button>
+            <button v-if="isManager()" @click="onDelete" color="primary" class="bookBtn2">도서 삭제</button>
+            <button class="bookBtn3">
+                <router-link :to="{ name: 'ManagementBookPage' }" style="text-decoration:none; color: white"> 돌아가기 </router-link>
+            </button>
+        </div>
     </div>
 </template>
 
@@ -57,5 +63,23 @@ export default {
 }
 </script>
 
-<style lang="">
+<style lang="css">
+.bookBtn1{
+    margin: 10px;
+    width: 100px;
+    height: 40px;
+    background-color: rgb(248, 35, 106);
+}
+.bookBtn2{
+    margin: 10px;
+    width: 100px;
+    height: 40px;
+    background-color: white;
+}
+.bookBtn3{
+    margin: 10px;
+    width: 100px;
+    height: 40px;
+    background-color: rgb(248, 191, 35);
+}
 </style>

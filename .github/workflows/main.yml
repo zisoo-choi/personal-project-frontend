@@ -1,9 +1,8 @@
 name: Build and Deploy
-
 on:
-  repository_dispatch:
-    types: [CI_TEST_FINISH_TRIGGER]
-
+  push:
+    branches:
+      - main
 jobs:
   build:
     name: build-app
@@ -12,22 +11,18 @@ jobs:
     - name: Get Github Actions IP
       id: ip
       uses: haythem/public-ip@v1.2
-
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-northeast-2
-
     - name: Checkout repository
       uses: actions/checkout@v3
-
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
         node-version: '18'
-
     - name: Cache dependencies
       id: cache
       uses: actions/cache@v3
@@ -65,7 +60,6 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         source: "./dist/*"
         target: "/home/ec2-user/actions-tmp-repo"
-
     - name: Remove Github Actions IP From Security Group
       run: |
         aws ec2 revoke-security-group-ingress --group-id ${{ secrets.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32

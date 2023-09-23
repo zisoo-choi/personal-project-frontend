@@ -54,9 +54,6 @@ export default {
     justify-content: space-between; /* Space the child elements evenly */
     align-items: center; /* Center the content vertically */
 }
-.bottomFooter {
-    /* border: 1px solid black; */
-}
 .aboutCenter {
     display: flex; /* Use flexbox */
     flex-direction: column; /* Arrange the content vertically */

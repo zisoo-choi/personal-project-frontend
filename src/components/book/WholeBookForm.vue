@@ -30,6 +30,7 @@
   
 <script>
 import BookDetail from "@/components/book/sidePage/BookDetail.vue"
+import process from "../../../envS3";
 
 export default {
     props: {

@@ -27,3 +27,4 @@ docker-compose.yml
 .env.development
 .env.production
 process.js
+envS3.js

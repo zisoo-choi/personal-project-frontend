@@ -15,6 +15,7 @@
 
 <script>
 import AWS from 'aws-sdk';
+import process from "../../../envS3";
 
 export default {
     name: "S3ImageUpload",

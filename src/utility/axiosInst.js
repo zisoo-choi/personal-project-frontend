@@ -1,5 +1,5 @@
 import axios from "axios";
-import env from "../env";
+import process from "../env";
 
 const axiosInst = axios.create({
     // baseURL: 'http://localhost:7777',

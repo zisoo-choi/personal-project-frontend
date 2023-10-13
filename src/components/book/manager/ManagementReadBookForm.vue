@@ -71,7 +71,9 @@
         </div>
     </div>
 </template>
+
 <script>
+import process from "../../../../envS3";
 
 export default {
     name: "ManagementReadBookForm",

@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import process from "../../../envS3";
 
 export default {
     data () {

@@ -1,4 +1,5 @@
 name: Build and Deploy
+
 on:
   push:
     branches:
@@ -77,7 +78,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           script_stop: true
           script: |
-            cd personal-project/frontend
+            cd cloud-library-project/frontend/actions-runner
             cp -r ~/actions-tmp-repo/dist/* ./html/
             
             docker image prune -f

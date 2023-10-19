@@ -30,7 +30,6 @@
   
 <script>
 import BookDetail from "@/components/book/sidePage/BookDetail.vue"
-// import process from "../../../envS3";
 import env from "../../env";
 const awsBucketName = env.api.S3_Bucket;
 const awsBucketRegion = env.api.S3_Region;

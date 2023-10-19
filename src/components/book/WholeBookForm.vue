@@ -30,7 +30,11 @@
   
 <script>
 import BookDetail from "@/components/book/sidePage/BookDetail.vue"
-import process from "../../../envS3";
+// import process from "../../../envS3";
+import env from "../../env";
+const awsBucketName = env.api.S3_Bucket;
+const awsBucketRegion = env.api.S3_Region;
+const awsPoolId = env.api.S3_PoolId
 
 export default {
     props: {
@@ -46,9 +50,12 @@ export default {
       isSidePageOpen: false,
       selectedBook: null,
       selectedBookNumber: null,
-      awsBucketName: process.env.VUE_APP_S3_BUCKET_NAME,
-      awsBucketRegion: process.env.VUE_APP_S3_REGION,
-      awsIdentityPoolId: process.env.VUE_APP_S3_IDENTITY_POOL_ID,
+    //   awsBucketName: process.env.VUE_APP_S3_BUCKET_NAME,
+    //   awsBucketRegion: process.env.VUE_APP_S3_REGION,
+    //   awsIdentityPoolId: process.env.VUE_APP_S3_IDENTITY_POOL_ID,
+        awsBucketName: awsBucketName,
+        awsBucketRegion: awsBucketRegion,
+        awsIdentityPoolId: awsPoolId,
     };
   },
   methods: {

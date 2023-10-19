@@ -7,8 +7,8 @@
         <p v-else>로딩중 .......</p>
 
         <div class="bookBottomBtn" style="text-align: center;">
-            <button class="bookBtn1">
-                <router-link v-if="isManager()" :to="{ name: 'ModifyBookPage', params: { bookNumber } }" style="text-decoration:none; color: white">
+            <button v-if="isManager()" class="bookBtn11">
+                <router-link :to="{ name: 'ModifyBookPage', params: { bookNumber } }" style="text-decoration:none; color: white">
                     도서 수정
                 </router-link>
             </button>
@@ -86,5 +86,11 @@ export default {
 }
 .returnBtn:hover {
     background-color: #F5F5F5; /* 호버 시 배경색 변경 */
+}
+.bookBtn11{
+    margin: 10px;
+    width: 100px;
+    height: 40px;
+    background-color: rgb(248, 35, 106);
 }
 </style>

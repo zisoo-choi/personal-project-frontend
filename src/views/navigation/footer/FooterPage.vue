@@ -41,7 +41,8 @@ export default {
 
 <style>
 .footerFull{
-    background-color: rgba(131, 201, 244, 0.515);
+    background-color: rgba(255, 255, 255);
+    margin-top: 30px;
 }
 .footerContent {
     padding: 20px;

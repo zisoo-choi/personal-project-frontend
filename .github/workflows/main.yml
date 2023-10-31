@@ -87,7 +87,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script_stop: true
           script: |
-            cd cloud-library-project/frontend/actions-runner
+            cd cloud-library-project/frontend
             cp -r ~/actions-tmp-repo/dist/* ./html/
             
             docker image prune -f
